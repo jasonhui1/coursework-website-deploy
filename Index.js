@@ -7,9 +7,9 @@ const express = require('express');
 const app = express();
 
 //change port
-const port = process.env.PORT || 2000
+// const port = || 2000
 
-app.listen(port, () => console.log(`listening at ${port}`));
+app.listen(process.env.PORT , () => console.log(`listening at ${process.env.PORT }`));
 
 //folder name
 app.use(express.static('public'));
