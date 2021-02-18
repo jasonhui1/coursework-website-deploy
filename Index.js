@@ -7,7 +7,8 @@ const express = require('express');
 const app = express();
 
 //change port
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 2000
+
 app.listen(port, () => console.log(`listening at ${port}`));
 
 //folder name
