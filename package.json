@@ -6,12 +6,13 @@
   "author": "Me",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.1"
   },
 	
   "engines": {
     "node": "14.x"
   },
+	
   "scripts": {
   	"start": "node ./Index.js"
   }
