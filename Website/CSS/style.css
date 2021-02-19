@@ -9,10 +9,6 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-#log-out{
-	color:#fff;
-}
-
 h1  {
 	font-size: 42px;
 	font-family: Arial;
@@ -62,7 +58,7 @@ h2 {
 	width: 50%;	
 }
 
-.middle-section {
+.middleSection {
 	background-image: url("../images/main-section.jpg");
 	background-size: contain;
   	height: 50%; /* You must set a specified height */
@@ -74,7 +70,7 @@ h2 {
 
 
 /*prize section 'cards' */
-.prize-section div{
+.prizeSection div{
 	overflow: visible;
 	padding: 10px;
 	margin-right: 20px;
@@ -157,13 +153,16 @@ h2 {
 	color: white;
 	overflow: hidden;
 }
-.navbar-left{
+.navbarLeft{
 	float: left;
 }
-
-.navbar-right{
+.navbarRight{
 	float: right;
 }
+
+
+
+
 
 .leaderboard {
 	background-color: #18a964;

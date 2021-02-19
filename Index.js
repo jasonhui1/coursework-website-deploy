@@ -12,5 +12,5 @@ const app = express();
 app.listen(port, () => console.log(`listening at ${port}`));
 
 //folder name
-app.use(express.static('public'));
+app.use(express.static('Website'));
 
