@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Baffle</title>
+	<link rel="stylesheet" href="../css/style.css">	
+<!--	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+	<link href="../css/bootstrap.min.css" rel="stylesheet"><link rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	
+
+</head>
+	
+
+<!--navigation bar-->
+<div class="section topnav">
+
+	<!-- left items of navigation bar -->
+	<div class="navbar-left">
+		<img src="../images/UoB_Logo.svg">
+	</div>
+
+	<!-- right items of navigation bar -->
+	<div class="navbar-right">
+		<a href="#" id="log-out"><span><i class="fas fa-sign-out-alt" ></i>Log out</span></a>
+	</div>
+
+</div>
+
+<body>
+	
+	<!-- Prize and description -->
+	<div class="middle-section">
+		<h2> THIS RAFFLE'S PRIZE </h2>
+
+		<div class="prize-section">
+			<div id="left" class="prize prizeImage"></div>
+			<!--The prize description-->
+			<div id="right" class="prize prizeDescription">
+				<p1>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+					labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+					laboris nisi ut aliquip ex ea commodo consequat.
+					Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+					pariatur. Excepteur sint occaecat
+					cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</p1>
+			</div>
+
+
+		</div>
+		<h2> Raffle ends 1/4/2021</h2>
+	</div>
+	
+
+	<div class="section leaderboard">Leaderboard</div>
+	
+	
+	<div class="section submission">
+		<!--Creating the submission table where users input weight-->
+		<table class="subTable">
+			<caption style="caption-side: top">Your current submission</caption>
+			<tr>
+				<td>Amount of general rubbish</td>
+				<!--Need to make it so only when edit is pressed the content is editable, else cannot-->
+				<td contentEditable="false"><span id="gw_value">24.9</span><span id="gw_unit">kg</span></td>
+				<!--Button should allow amount to be edited/updated to the database -->
+				<td><button type="button" id="gw_button" data-toggle="modal" data-target="#gw_modal">EDIT</button>
+				<td><button type="button" id="gw_add_button" data-toggle="modal" data-target="#add_gw_modal">ADD</button></td>
+			</tr>
+			<tr>
+				<td>Amount recycled this week</td>
+				<!--Need to make it so only when edit is pressed the content is editable, else cannot-->
+				<td contentEditable="false"><span  id="rw_value">28.9</span><span  id="rw_unit">kg</span></td>
+				<!--Button should allow amount to be edited/updated to the database -->
+				<td><button type="button" id="rw_button" data-toggle="modal" data-target="#rw_modal">EDIT</button>
+				<td><button type="button" id="rw_add_button" data-toggle="modal" data-target="#add_rw_modal">ADD</button></td>
+
+			</tr>
+		</table>
+
+		<table class="subTable">
+			<caption style="caption-side: top">Raffle details</caption>
+			<tr>
+				<td>Your total recycling percentages</td>
+				<!--Percentage from data -->
+				<td>24.9%</td>
+			</tr>
+			<tr>
+				<td>Next rubbish collection date</td>
+				<!--Random collection date???-->
+				<td>11/12/2020</td>
+			</tr>
+		</table>
+
+			
+	</div>
+		
+	<div class="modal fade" id="add_gw_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title">Add general waste measurement</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			  </div>
+			  <div class="modal-body">
+				  <!--database number -->
+				  <label>Add </label>
+					<input type="number" id="input_add_gw">
+				  
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				  <!--update the new value into the database-->
+				  <button class="btn btn-primary"  data-dismiss="modal" onclick= "add($('#input_add_gw').val(), $('#gw_value'))">  Save changes</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		
+		
+	<div class="modal fade" id="add_rw_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title">Add recycled waste measurement</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			  </div>
+			  <div class="modal-body">
+				  <!--database number -->
+				  <label>Add </label>
+					<input type="number" id="input_add_rw">
+				  
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				  <!--update the new value into the database-->
+				  <button class="btn btn-primary"  data-dismiss="modal" onclick= "add($('#input_add_rw').val(), $('#rw_value'))">  Save changes</button>
+
+				  
+			  </div>
+			</div>
+		  </div>
+		</div>
+		
+	<div class="modal fade" id="gw_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title">Edit general waste measurement</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			  </div>
+			  <div class="modal-body">
+				  <!--database number -->
+				  <label class="d-block">Measured <span id = "gw_value_modal">15kg </span> </label>
+				  <label>New measurement: </label>
+					<input type="number" id="input_edit_gw">
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				  <!--update the new value into the database-->
+				<button type="button" class="btn btn-primary" data-dismiss="modal" onclick= "replace($('#input_edit_gw').val(), $('#gw_value'))">Save changes</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		
+		
+		
+		<div class="modal fade" id="rw_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title">Edit recycled waste measurement</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			  </div>
+			  <div class="modal-body">
+				  <!--database number -->
+				  <label class="d-block">Measured <span id="rw_value_modal">15kg </span> </label>
+				  <label>New measurement: </label>
+					<input type="number" id="input_edit_rw">
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<!--update the new value into the database-->
+				<button type="button" class="btn btn-primary" data-dismiss="modal" onclick= "replace($('#input_edit_rw').val(), $('#rw_value'))">Save changes</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+</body>
+	
+	
+	<script src="../JS/Main.js"></script>
+</div>
+<div class="section footer">Footer</div>
+
+</html>

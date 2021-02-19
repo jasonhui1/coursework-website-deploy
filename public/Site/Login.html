@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+
+<head>
+
+	<meta charset="utf-8">
+	<title>Login</title>
+	<link rel="stylesheet" href="../css/style.css">	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+	
+<div class="top">
+
+	<!-- left items of navigation bar -->
+	<div class="logo">
+		<img src="../images/UoB_Logo.svg">
+	</div>
+
+</div>
+<body>
+    <div class="wrapper">
+
+        <div class="bg-image"></div>
+
+        <div class="form-box">
+            <div class="button-box">
+                <div id="btn"></div>
+                <!--TO DO : Create the login() function for log in section (switches to login section of the form)-->
+                <button type="button" id="login-top" class="toggle-btn" onclick="login()"> Log In </button>
+                <!--TO DO : Create the register() function for register button (switches to register section of the form)-->
+                <button type="button" id="register-top" class="toggle-btn" onclick="register()">Register </button>
+            </div>
+
+            <h3> Baffle </h3>
+
+            <!--Log in input fields and submit-->
+            <form id="login" class="input-group">
+                <input type="text" class="input-field" placeholder="User ID or Email Address" required>
+                <input type="text" class="input-field" placeholder="Password" required>
+                <input type="checkbox" class="check-box"><span class="remember-password">Remember Password</span>
+                <button type="submit" class="submit-btn" onclick="location.href='Main.html';">Log in</button>
+            </form>
+
+             <!--Register input fields and submit-->
+            <form id="register" class="input-group">
+                <input type="text" class="input-field" placeholder="User ID" required>
+                <input type="email" class="input-field" placeholder="Email ID" required>
+                <input type="email" class="input-field" placeholder="Enter Password" required>
+                <!--<label for="accomodations" class="input-field">Choose accomodation</label>-->
+            
+                <select name="accomodations" class="input-field" id="accomodations" placeholder="Choose accomodation" required>
+                    <option disabled hidden selected>Select Accomodation</option>
+                    <optgroup label="On Campus">
+                        <option value="Brendon Court">Brendon Court</option>
+                        <option value="Marlborough Court and Solsbury Court">Marlborough Court and Solsbury Court</option>
+                        <option value="Norwood House">Norwood House</option>
+                        <option value="Eastwood">Eastwood</option>
+                        <option value="Osborne House">Osborne House</option>
+                        <option value="Polden">Polden</option>
+                        <option value="Polden Court">Polden Court</option>
+                        <option value="The Quads">The Quads</option>
+                        <option value="Westwood">Westwood</option>
+                        <option value="Woodland Court">Woodland Court</option>
+                    </optgroup>
+                    <optgroup label="Off Campus">
+                        <option value="Carpenter House">Carpenter House</option>
+                        <option value="John Wood Building">John Wood Building</option>
+                        <option value="John Wood Court">John Wood Court</option>
+                        <option value="Green Park House">Green Park House</option>
+                    </optgroup>
+                </select>
+
+                <input type="checkbox" class="check-box"><span class="terms-conditions">I agree to the Terms & Conditions</span>
+                <button type="submit" class="submit-btn">Register</button>
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+    var x = document.getElementById("login");
+    var y = document.getElementById("register");
+    var z = document.getElementById("btn");
+
+    var a = document.getElementById("login-top");
+    var b = document.getElementById("register-top");
+    
+
+    //Switches to register field
+    function register(){
+        x.style.left = "-400px";
+        y.style.left = "50px";
+        z.style.left = "110px";
+        b.style.color = "#fff";
+        a.style.color = "#18a964";
+    }   
+
+    //Switches to login field
+    function login(){
+        x.style.left = "50px";
+        y.style.left = "450px"
+        z.style.left = "0";
+        a.style.color = "#fff";
+        b.style.color = "#18a964";
+
+    }
+</script>
+</body>
+</html>
