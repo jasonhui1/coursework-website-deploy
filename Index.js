@@ -254,7 +254,7 @@ app.get('/CSS/:filepath', (request, response) => {
 
 	let param = request.params.filepath;
   // console.log(param)
-	let p = __dirname + '/Website/' + '/CSS/' + param;
+	let p = __dirname + '/Website/' + 'CSS/' + param;
 
 	if(fs.existsSync(p)){
 		response.sendFile(p)
@@ -269,7 +269,7 @@ app.get('/JS/:filepath', (request, response) => {
 
 	let param = request.params.filepath;
   // console.log(param)
-	let p = __dirname + '/Website/' + '/JS/' + param;
+	let p = __dirname + '/Website/' + 'JS/' + param;
 
 	if(fs.existsSync(p)){
 		response.sendFile(p)
@@ -277,16 +277,13 @@ app.get('/JS/:filepath', (request, response) => {
 	} else{
 		//something
 	}
-	
 })
 
 app.get('/images/:filepath', (request, response) => {
 
 	let param = request.params.filepath;
   // console.log(param)
-	let p = __dirname + '/Website/' + '/images/' + param;
-
-  console.log(p)
+	let p = __dirname + '/Website/' + 'images/' + param;
 
 	if(fs.existsSync(p)){
 		response.sendFile(p)
@@ -295,5 +292,4 @@ app.get('/images/:filepath', (request, response) => {
 		//do somethinf
     console.log(p)
 	}
-	
 })
