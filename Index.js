@@ -39,7 +39,7 @@ const database = mysql.createConnection({
     database: "heroku_77c81211407e3c6"
   });
   
-  //TEST
+  //Connect to the database
   database.connect(async function(err) {
     if (err) throw err;
     console.log("Connected!");
@@ -174,6 +174,7 @@ const database = mysql.createConnection({
         for (rows of result){
           if(await bcrypt.compare(request.body.password, rows.password)){
             console.log("RIGHT")
+            console.log(request.session)
             response.json({
               status: 'success'
             })
