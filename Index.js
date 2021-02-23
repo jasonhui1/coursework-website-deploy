@@ -17,7 +17,7 @@ let users = []
 
 
 app.use(session({
-  secret: 'keyboard cat',
+  secret: process.env.SECURE_KEY,
   resave: false,
   saveUninitialized: true,
   // cookie: { secure: true }
@@ -37,8 +37,6 @@ app.use('/static', express.static('Website'));
 app.use(express.json({ limit: '1mb' }));
 
 //CleanDB connection
-console.log(process.env.DATABASE)
-
 const database = mysql.createConnection({
     host: process.env.HOST,
     user: process.env.USER,
