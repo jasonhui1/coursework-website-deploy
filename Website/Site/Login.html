@@ -7,14 +7,6 @@
 	<title>Login</title>
     <!-- <base href="/"> -->
 	<link rel="stylesheet" href="/CSS/style.css">	
-
-    <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
@@ -36,23 +28,23 @@
             <div class="button-box">
                 <div id="btn"></div>
                 <!--TO DO : Create the login() function for log in section (switches to login section of the form)-->
-                <button type="button" id="login-top" class="toggle-btn" name = "username" onclick="login()"> Log In </button>
+                <button type="button" id="login-top" class="toggle-btn" onclick="login()"> Log In </button>
                 <!--TO DO : Create the register() function for register button (switches to register section of the form)-->
-                <button type="button" id="register-top" class="toggle-btn" name="password" onclick="register()">Register </button>
+                <button type="button" id="register-top" class="toggle-btn" onclick="register()">Register </button>
             </div>
 
             <h3> Baffle </h3>
 
             <!--Log in input fields and submit-->
-            <form id="login" class="input-group" onsubmit="checkLogin(event)">
-                <input type="text" class="input-field" name="username" placeholder="User ID or Email Address" required>
-                <input type="text" class="input-field" name="password" placeholder="Password" required>
+            <form id="login" class="input-group">
+                <input type="text" class="input-field" placeholder="User ID or Email Address" required>
+                <input type="text" class="input-field" placeholder="Password" required>
                 <input type="checkbox" class="check-box"><span class="remember-password">Remember Password</span>
-                <button type="submit" class="submit-btn">Login</button>
+                <button type="submit" class="submit-btn" onclick="location.href='Main.html';">Log in</button>
             </form>
 
              <!--Register input fields and submit-->
-            <form id="register" class="input-group"> 
+            <form id="register" class="input-group">
                 <input type="text" class="input-field" placeholder="User ID" required>
                 <input type="email" class="input-field" placeholder="Email ID" required>
                 <input type="email" class="input-field" placeholder="Enter Password" required>
@@ -88,8 +80,6 @@
     </div>
 
     <script>
-
-        // sendData();
     var x = document.getElementById("login");
     var y = document.getElementById("register");
     var z = document.getElementById("btn");
@@ -116,31 +106,6 @@
         b.style.color = "#18a964";
 
     }
-
-
-    function checkLogin(event){
-
-        event.preventDefault(); //prevent submitting the form
-        let form = $("#login");
-        
-        $.ajax({
-            url: "/loginTest",   //url location of request handler
-            type: "POST",   //Type of request
-            data: form.serialize(),    //extract data from form
-            dataType: "json",
-            success: response => {  //If a response is received from server
-                // console.log(response)
-                if(response.status == "success"){
-                    window.location.href = "Main.html";
-                } else {
-                    //pop up boxes
-                    console.log("FAIL")
-                }
-            }
-        });
-    }
-
-
 </script>
 </body>
 </html>
