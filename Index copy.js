@@ -8,13 +8,11 @@ const path = require("path");
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const fs   = require('fs');
-require('dotenv').config();
+
+
 
 
 const app = express();
-
-let users = []
-
 
 app.use(session({
   secret: 'keyboard cat',
@@ -32,21 +30,19 @@ app.listen(port, () => console.log(`listening at ${port}`));
 //folder name
 // app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.urlencoded({extended: false}));
-// app.use(express.static('Website'));
-app.use('/static', express.static('Website'));
+app.use(express.static('Website'));
+// app.use('/static', express.static('Website'));
 app.use(express.json({ limit: '1mb' }));
 
 //CleanDB connection
-console.log(process.env.DATABASE)
-
 const database = mysql.createConnection({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE
+    host: "eu-cdbr-west-03.cleardb.net",
+    user: "bd35bdd40f5964",
+    password: "075d8b73",
+    database: "heroku_77c81211407e3c6"
   });
   
-  //Connect to the database
+  //TEST
   database.connect(async function(err) {
     if (err) throw err;
     console.log("Connected!");
@@ -156,26 +152,16 @@ const database = mysql.createConnection({
   })
   
 
-  app.get('/Site/Main.html', (request, response) => {
+  app.get('/Main.html'), (request, response) => {
     console.log("MAIN ACCESS")
-    // let thisUser = {id:request.session.userId, user_name: request.session.userName}
-
-    if(users.includes(request.session.userId)){
-      // response.redirect('Main.html')
-    response.sendFile(path.join(__dirname,'Website/Site/Main.html'));
-
-      
-
-    } else {
-      response.redirect('Login.html')
-    }
-    
-  })
+  }
 
   //CHECK LOGIN
   app.post('/loginTest', (request, response) => {
 
-    let sql = `SELECT id, user_name, password FROM user WHERE user_name = ${mysql.escape(request.body.username)} LIMIT 1`;
+    console.log("HELLLOoo")
+
+    let sql = `SELECT user_name, password FROM user WHERE user_name = ${mysql.escape(request.body.username)} LIMIT 1`;
     console.log(mysql.escape(request.body.username))
 
     database.query(sql, async function (err, result) {
@@ -187,18 +173,12 @@ const database = mysql.createConnection({
             status: 'fail'
           })
         }
+
+        console.log("USERNA<E NO T EXIST")
         //password matches or not
         for (rows of result){
           if(await bcrypt.compare(request.body.password, rows.password)){
             console.log("RIGHT")
-
-            // users.push({id: rows.id, user_name: rows.user_name})
-            users.push(rows.id)
-            console.log(users)
-            request.session.userId = rows.id
-            request.session.userName = rows.user_name
-
-            console.log(request.session)
             response.json({
               status: 'success'
             })
@@ -227,7 +207,7 @@ app.get('/:filepath', (request, response) => {
 		response.sendFile(p)
 		
 	} else{
-		response.sendFile(__dirname + '/Website/Site/' + '404.html')
+		response.sendFile(__dirname + '/Website/' + '/404.html')
 	}
 	
 })
@@ -245,7 +225,7 @@ app.get('/Site/:filepath', (request, response) => {
 		response.sendFile(p)
 		
 	} else{
-		response.sendFile(__dirname + '/Website/Site/' + '404.html')
+		response.sendFile(__dirname + '/Website/' + '/404.html')
 	}
 	
 })
@@ -254,44 +234,13 @@ app.get('/Site/:filepath', (request, response) => {
 app.get('/CSS/:filepath', (request, response) => {
 
 	let param = request.params.filepath;
-  // console.log(param)
-	let p = __dirname + '/Website/' + '/CSS/' + param;
+	let p = __dirname + '/CSS/Site/' + param;
 
 	if(fs.existsSync(p)){
 		response.sendFile(p)
 		
 	} else{
-		//something
-	}
-	
-})
-
-app.get('/JS/:filepath', (request, response) => {
-
-	let param = request.params.filepath;
-  // console.log(param)
-	let p = __dirname + '/Website/' + '/JS/' + param;
-
-	if(fs.existsSync(p)){
-		response.sendFile(p)
-		
-	} else{
-		//something
-	}
-	
-})
-
-app.get('/images/:filepath', (request, response) => {
-
-	let param = request.params.filepath;
-  // console.log(param)
-	let p = __dirname + '/Website/' + '/images/' + param;
-
-	if(fs.existsSync(p)){
-		response.sendFile(p)
-		
-	} else{
-		return false
+		response.body.append("NOT FOUND CSS")
 	}
 	
 })
