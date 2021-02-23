@@ -289,7 +289,7 @@ app.get('/images/:filepath', (request, response) => {
 		response.sendFile(p)
 		
 	} else{
-		return false
+		//do somethinf
 	}
 	
 })
