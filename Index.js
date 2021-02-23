@@ -34,7 +34,7 @@ app.listen(port, () => console.log(`listening at ${port}`));
 app.use(bodyParser.urlencoded({extended: false}));
 // app.use(express.static('Website'));
 app.use('/static', express.static('Website'));
-app.use(express.json({ limit: '1mb' }));
+app.use(express.json({ limit: '3mb' }));
 
 //CleanDB connection
 const database = mysql.createConnection({
@@ -42,40 +42,48 @@ const database = mysql.createConnection({
     user: process.env.USER,
     password: process.env.PASSWORD,
     database: process.env.DATABASE
-  });
+});
   
   //Connect to the database
-  database.connect(async function(err) {
-    if (err) throw err;
-    console.log("Connected!");
 
-    // TEST adding encrypt password using bcrypt to the database, can use this username nad testpw to login
+let connection;
+function databaseConnect(){
 
-      // let username = 'admin';
-      // let testpw = 'test';
+  console.log("Connected!");
+  connection = mysql.createConnection(database)
+  
 
-      // let password = await bcrypt.hashSync(testpw, 10);
+  connection.on('error', databaseConnect());
 
-      // let sql = "INSERT INTO user (first_name, last_name, email, permission,user_name, password) VALUES (?)";
-      // let inserts = ['Group', '4', 'test@adf.com', 1, username, password];
+  // TEST adding encrypt password using bcrypt to the database, can use this username nad testpw to login
 
-      //  database.query(sql, [inserts], function (err, result) {
-      //    if (err) throw err;
-      //    console.log("1 record inserted");
-      //  });
+    // let username = 'admin';
+    // let testpw = 'test';
+
+    // let password = await bcrypt.hashSync(testpw, 10);
+
+    // let sql = "INSERT INTO user (first_name, last_name, email, permission,user_name, password) VALUES (?)";
+    // let inserts = ['Group', '4', 'test@adf.com', 1, username, password];
+
+    //  database.query(sql, [inserts], function (err, result) {
+    //    if (err) throw err;
+    //    console.log("1 record inserted");
+    //  });
 
 
-      // sql = `SELECT user_name, password FROM user WHERE user_name = ${mysql.escape(username)} LIMIT 1`;
+    // sql = `SELECT user_name, password FROM user WHERE user_name = ${mysql.escape(username)} LIMIT 1`;
 
-      // database.query(sql, async function (err, result) {
-      //     if (err) throw err;
-      //     for (rows of result){
-      //     console.log(rows.user_name);
-      //     console.log(await bcrypt.compare(testpw, rows.password))
-      //     }
-      // });
+    // database.query(sql, async function (err, result) {
+    //     if (err) throw err;
+    //     for (rows of result){
+    //     console.log(rows.user_name);
+    //     console.log(await bcrypt.compare(testpw, rows.password))
+    //     }
+    // });
 
-  });
+};
+
+
 
   // app.get('/get_raffle_data', (request, response) => {
       
