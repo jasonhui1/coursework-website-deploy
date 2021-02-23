@@ -157,6 +157,7 @@ const database = mysql.createConnection({
   app.get('/Site/Main.html', (request, response) => {
     console.log("MAIN ACCESS")
     // let thisUser = {id:request.session.userId, user_name: request.session.userName}
+    console.log(users.includes(request.session.userId))
 
     if(users.includes(request.session.userId)){
       // response.redirect('Main.html')
@@ -285,11 +286,14 @@ app.get('/images/:filepath', (request, response) => {
   // console.log(param)
 	let p = __dirname + '/Website/' + '/images/' + param;
 
+  console.log(p)
+
 	if(fs.existsSync(p)){
 		response.sendFile(p)
 		
 	} else{
 		//do somethinf
+    console.log(p)
 	}
 	
 })
