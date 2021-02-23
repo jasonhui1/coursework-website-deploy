@@ -27,8 +27,8 @@ app.listen(port, () => console.log(`listening at ${port}`));
 //folder name
 // app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.urlencoded({extended: false}));
-// app.use(express.static('Website'));
-app.use('/static', express.static('Website'));
+app.use(express.static('Website'));
+// app.use('/static', express.static('Website'));
 app.use(express.json({ limit: '1mb' }));
 
 //CleanDB connection
@@ -149,14 +149,14 @@ const database = mysql.createConnection({
   })
   
 
-  app.get('/Site/Main.html', (request, response) => {
+  app.get('/Main.html'), (request, response) => {
     console.log("MAIN ACCESS")
-    //if(session)
-    response.sendFile(__dirname + '/Website/Site/' + 'Main.html')
-  })
+  }
 
   //CHECK LOGIN
   app.post('/loginTest', (request, response) => {
+
+    console.log("HELLLOoo")
 
     let sql = `SELECT user_name, password FROM user WHERE user_name = ${mysql.escape(request.body.username)} LIMIT 1`;
     console.log(mysql.escape(request.body.username))
@@ -170,6 +170,8 @@ const database = mysql.createConnection({
             status: 'fail'
           })
         }
+
+        console.log("USERNA<E NO T EXIST")
         //password matches or not
         for (rows of result){
           if(await bcrypt.compare(request.body.password, rows.password)){
@@ -202,7 +204,7 @@ app.get('/:filepath', (request, response) => {
 		response.sendFile(p)
 		
 	} else{
-		response.sendFile(__dirname + '/Website/Site/' + '404.html')
+		response.sendFile(__dirname + '/Website/' + '/404.html')
 	}
 	
 })
@@ -220,7 +222,7 @@ app.get('/Site/:filepath', (request, response) => {
 		response.sendFile(p)
 		
 	} else{
-		response.sendFile(__dirname + '/Website/Site/' + '404.html')
+		response.sendFile(__dirname + '/Website/' + '/404.html')
 	}
 	
 })
@@ -229,44 +231,13 @@ app.get('/Site/:filepath', (request, response) => {
 app.get('/CSS/:filepath', (request, response) => {
 
 	let param = request.params.filepath;
-  // console.log(param)
-	let p = __dirname + '/Website/' + '/CSS/' + param;
+	let p = __dirname + '/CSS/Site/' + param;
 
 	if(fs.existsSync(p)){
 		response.sendFile(p)
 		
 	} else{
-		//something
-	}
-	
-})
-
-app.get('/JS/:filepath', (request, response) => {
-
-	let param = request.params.filepath;
-  // console.log(param)
-	let p = __dirname + '/Website/' + '/JS/' + param;
-
-	if(fs.existsSync(p)){
-		response.sendFile(p)
-		
-	} else{
-		//something
-	}
-	
-})
-
-app.get('/images/:filepath', (request, response) => {
-
-	let param = request.params.filepath;
-  // console.log(param)
-	let p = __dirname + '/Website/' + '/images/' + param;
-
-	if(fs.existsSync(p)){
-		response.sendFile(p)
-		
-	} else{
-		return false
+		response.body.append("NOT FOUND CSS")
 	}
 	
 })
