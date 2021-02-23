@@ -9,6 +9,10 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
+#log-out{
+	color:#fff;
+}
+
 h1  {
 	font-size: 42px;
 	font-family: Arial;
@@ -57,8 +61,48 @@ h2 {
 	border: 2px solid gray;
 	width: 50%;	
 }
+ .leaderboard caption{
+	font-size : 25px;
+	background-color: greenyellow;
+	text-align:left;
+	border-top-left-radius:6px;
+	border-top-right-radius: 6px;
+	-moz-border-top-left-radius:6px;
+	-moz-border-top-right-radius:6px;
+ }
+ .leaderboard table{
+	margin-left: auto;
+	margin-right: auto;
+	width: 90%;
+	border: 3px solid greenyellow;
+	border-right-color: greenyellow;
+	border-right-width: 5px;
+	border-left-color: greenyellow;
+	border-left-width: 5px;
+	border-bottom-color: greenyellow;
+	border-bottom-width: 5px;
+	border-collapse: collapse;
+	border-bottom-left-radius:6px;
+	border-bottom-right-radius: 6px;
+	-moz-border-bottom-left-radius:6px;
+	-moz-border-bottom-right-radius:6px;
+	margin: 30px;
+ }
+ .leaderboardTable th{
+	background-color:green; 
+	color:white;
+ }
 
-.middleSection {
+ .leaderboardTable tr{
+	border: 2px solid white;
+	width: 50%;	
+ }
+ .leaderboardTable tr:nth-child(even){
+	background-color: lightgreen;
+	color: #fff;
+  }
+
+.middle-section {
 	background-image: url("../images/main-section.jpg");
 	background-size: contain;
   	height: 50%; /* You must set a specified height */
@@ -70,7 +114,7 @@ h2 {
 
 
 /*prize section 'cards' */
-.prizeSection div{
+.prize-section div{
 	overflow: visible;
 	padding: 10px;
 	margin-right: 20px;
@@ -153,16 +197,13 @@ h2 {
 	color: white;
 	overflow: hidden;
 }
-.navbarLeft{
+.navbar-left{
 	float: left;
 }
-.navbarRight{
+
+.navbar-right{
 	float: right;
 }
-
-
-
-
 
 .leaderboard {
 	background-color: #18a964;
