@@ -4,43 +4,40 @@
 <head>
 	<meta charset="utf-8">
 	<title>Baffle</title>
-	
+
+	<link rel="stylesheet" href="../css/style.css">	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
-	<link rel="stylesheet" href="../CSS/style.css">	
-	
+
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-	
-
 </head>
 	
 
+<!--navigation bar-->
+<div class="section topnav">
 
+	<!-- left items of navigation bar -->
+	<div class="navbar-left">
+		<img src="../images/UoB_Logo.svg">
+	</div>
+
+	<!-- right items of navigation bar -->
+	<div class="navbar-right">
+		<a href="#" id="log-out"><span><i class="fas fa-sign-out-alt" ></i>Log out</span></a>
+	</div>
+
+</div>
 
 <body>
-	<!--navigation bar-->
-	<div class="section topnav">
-
-		<!-- left items of navigation bar -->
-		<div class="navbar-left">
-			<img src="../images/UoB_Logo.svg">
-
-		<!-- right items of navigation bar -->
-			<div class="navbarRight">
-				<a href="#"><span><i class="fas fa-sign-out-alt"></i>Log out</span></a>
-			</div>
-
-		</div>
-	</div>
 	
 	<!-- Prize and description -->
-	<div class="middleSection">
+	<div class="middle-section">
 		<h2> THIS RAFFLE'S PRIZE </h2>
 
-		<div class="prizeSection">
+		<div class="prize-section">
 			<div id="left" class="prize prizeImage"></div>
 			<!--The prize description-->
 			<div id="right" class="prize prizeDescription">
@@ -60,7 +57,40 @@
 	</div>
 	
 
-	<div class="section leaderboard">Leaderboard</div>
+	<div class="section leaderboard">Leaderboard
+			<table class="leaderboardTable">
+				<caption style="caption-side: top">Current Leaderboard</caption>
+				<th>Position</th>
+				<th>Tickets awarded after this week</th>
+				<th>Accomodation name</th>
+				<th>Percentage Recycled in this period (%)</th>
+				<th>No. of Raffle Tickets</th>
+				<tr>
+					<td>1</td>
+					<td>100</td>
+					<td>Cotswold</td>
+					<td>65%</td>
+					<td>2100</td>
+				</tr>
+			</table>
+
+			<table class="leaderboardTable">
+				<caption style="caption-side: top">Previous Raffle Period</caption>
+				<th>Position</th>
+				<th>Tickets awarded after this week</th>
+				<th>Accomodation name</th>
+				<th>Percentage Recycled in this period (%)</th>
+				<th>No. of Raffle Tickets</th>
+				<tr>
+					<td>1</td>
+					<td>100</td>
+					<td>Cotswold</td>
+					<td>65%</td>
+					<td>2100</td>
+				</tr>
+			</table>
+
+	</div>
 	
 	
 	<div class="section submission">
