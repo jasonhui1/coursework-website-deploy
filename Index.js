@@ -37,7 +37,7 @@ app.use('/static', express.static('Website'));
 app.use(express.json({ limit: '3mb' }));
 
 //CleanDB connection
-const database = mysql.createConnection({
+let database = mysql.createConnection({
     host: process.env.HOST,
     user: process.env.USER,
     password: process.env.PASSWORD,
@@ -45,15 +45,23 @@ const database = mysql.createConnection({
 });
   
   //Connect to the database
+function handleDisconnect(myconnection) {
+  myconnection.on('error', function(err) {
+    console.log('Re-connecting lost connection');
+    database.destroy();
+    database = mysql.createConnection( {   
+      host: process.env.HOST,
+      user: process.env.USER,
+      password: process.env.PASSWORD,
+      database: process.env.DATABASE});
+    handleDisconnect(database);
+    database.connect();
+  });
+}
 
-let connection;
-function databaseConnect(){
+handleDisconnect(database);
 
-  console.log("Connected!");
-  connection = mysql.createConnection(database)
-  
 
-  connection.on('error', databaseConnect());
 
   // TEST adding encrypt password using bcrypt to the database, can use this username nad testpw to login
 
@@ -80,8 +88,6 @@ function databaseConnect(){
     //     console.log(await bcrypt.compare(testpw, rows.password))
     //     }
     // });
-
-};
 
 
 
