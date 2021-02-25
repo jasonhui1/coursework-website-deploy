@@ -42,27 +42,28 @@
             <h3> Baffle </h3>
 
             <!--Log in input fields and submit-->
-            <form id="login" class="input-group" onsubmit="checkLogin(event)">
-                <input type="text" class="input-field" name="username" placeholder="User ID or Email Address" required>
+            <form id="login" class="input-group" onsubmit="loginUser(event)">
+                <input type="text" class="input-field" name="user_name" placeholder="User ID or Email Address" required>
                 <input type="text" class="input-field" name="password" placeholder="Password" required>
                 <input type="checkbox" class="check-box"><span class="remember-password">Remember Password</span>
                 <button type="submit" class="submit-btn">Login</button>
             </form>
 
              <!--Register input fields and submit-->
-            <form id="register" class="input-group"> 
-                <input type="text" class="input-field" placeholder="User ID" required>
-                <input type="email" class="input-field" placeholder="Email ID" required>
-                <input type="email" class="input-field" placeholder="Enter Password" required>
+            <form id="register" class="input-group" onsubmit="registerUser(event)"> 
+                <input type="text" class="input-field" name = "user_name" placeholder="User ID" required>
+                <input type="email" class="input-field" name = "email" placeholder="Email ID" required>
+                <input type="password" class="input-field" name = "password" placeholder="Enter Password" required>
                 <!--<label for="accomodations" class="input-field">Choose accomodation</label>-->
             
-                <select name="accomodations" class="input-field" id="accomodations" placeholder="Choose accomodation" required>
+                <select class="input-field" id="accomodations"  name = "accommodation" placeholder="Choose accomodation" required>
                     <option disabled hidden selected>Select Accomodation</option>
                     <optgroup label="On Campus">
                         <option value="Brendon Court">Brendon Court</option>
                         <option value="Marlborough Court and Solsbury Court">Marlborough Court and Solsbury Court</option>
                         <option value="Norwood House">Norwood House</option>
                         <option value="Eastwood">Eastwood</option>
+                        <option value="Eastwood 1">Eastwood 1</option>
                         <option value="Osborne House">Osborne House</option>
                         <option value="Polden">Polden</option>
                         <option value="Polden Court">Polden Court</option>
@@ -115,12 +116,13 @@
 
     }
 
-    function checkLogin(event){
+    function loginUser(event){
 
         event.preventDefault(); //prevent submitting the form
         let form = $("#login");
+
         $.ajax({
-            url: "/loginTest",   //url location of request handler
+            url: "/login_user",   //url location of request handler
             type: "POST",   //Type of request
             data: form.serialize(),    //extract data from form
             dataType: "json",
@@ -134,7 +136,32 @@
                 }
             }
         });
-        }
+    }
+
+    function registerUser(event){
+
+        event.preventDefault(); //prevent submitting the form
+        let form = $("#register");
+        console.log (form.serialize())
+
+        $.ajax({
+            url: "/register_user",   //url location of request handler
+            type: "POST",   //Type of request
+            data: form.serialize(),    //extract data from form
+            dataType: "json",
+            success: response => {  //If a response is received from server
+                // console.log(response)
+                if(response.status == "success"){
+                    window.location.href = "Main.html";
+                } else {
+                    //pop up boxes
+                    console.log("FAIL")
+                }
+            }
+        });
+
+
+    }
 </script>
 </body>
 </html>
