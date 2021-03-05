@@ -1,31 +1,64 @@
+//Handle url request
 const fs   = require('fs');
 const path = require("path");
 const express = require('express');
 const router = express.Router()
+const {auth_user} = require('./User.js')
+const session = require('express-session');
+require('dotenv').config();
+
+router.use(session({
+    secret: process.env.SECURE_KEY,
+    resave: false,
+    saveUninitialized: true,
+    // cookie: { secure: true }
+}))
 
 router.get('/', (request, response) => {
 	
     response.sendFile(path.join(__dirname,'Website/index.html'));
 })
 
+//Disallow going to Main.html if not logged in
+router.get('/Site/:filepath', (request, response) => {
 
-// router.get('/:filepath', (request, response) => {
+	//Add html to the end if not
+	let param = request.params.filepath;
+	if(!param.endsWith(".html")){
+		param += '.html';
+	}
+  
+	if(param == "Main.html"){
+	  console.log("Main Access")
+  
+	  console.log("WHEN ACCESS MAIN SESSION ")
+	  console.log(request.session)
+	  //Check if this user is logged in or not
+	  if(typeof request.session !== 'undefined' && typeof request.session.user !== 'undefined'){
+		let logged_in = auth_user(request.session.user.id, request.session.user.user_name)
+  
+		if(logged_in){
+		  response.sendFile(path.join(__dirname,'Website/Site/Main.html'));
+		  return
+  
+		}
+  
+	  } 
+	  //Not logged in
+	  response.redirect('Login.html')
+	  return;
+	}
+	//Check other url if exists
+	let p = __dirname + '/Website/Site/' + param ;
 
-// 	let param = request.params.filepath;
-// 	if(!param.endsWith(".html")){
-// 		param += '.html';
-// 	}
-
-// 	let p = __dirname + '/Website/Site/' + param ;
-
-// 	if(fs.existsSync(p)){
-// 		response.sendFile(p)
+	if(fs.existsSync(p)){
+		response.sendFile(p)
 		
-// 	} else{
-// 		response.sendFile(__dirname + '/Website/Site/' + '404.html')
-// 	}
-	
-// })
+	} else{
+		response.sendFile(__dirname + '/Website/Site/' + '404.html')
+  	}
+
+})
 
 router.get('/CSS/:filepath', (request, response) => {
 
