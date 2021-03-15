@@ -52,7 +52,7 @@ async function insert_query(query, inserts){
     }
 }
 
-async function update_query(query, inserts){
+async function update_query(query){
 
     const conn = await pool.getConnection();
 
@@ -69,9 +69,25 @@ async function update_query(query, inserts){
         conn.release();
     }
     
-    return []
 }
 
+async function delete_query(query){
 
+    const conn = await pool.getConnection();
 
-module.exports = {pool, select_query, insert_query, update_query};
+    try{
+        await conn.query(query)
+        return ['success']
+
+    } catch(err) {
+        console.log(query)
+        console.log("Failed")
+        throw err
+
+    } finally {
+        conn.release();
+    }
+
+}
+
+module.exports = {pool, select_query, insert_query, update_query, delete_query};

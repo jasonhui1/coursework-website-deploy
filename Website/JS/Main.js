@@ -1,89 +1,60 @@
-// const { parse } = require("dotenv/types");
+$(document).ready(async function () {
+    //Leaderboard
+    await get_leaderboard_data(time = 'current');
+    await get_leaderboard_data(time = 'previous');
+    await get_my_accommodation_data(time = 'current');
+    await get_my_accommodation_data(time = 'previous');
 
-//display weights in submission box
-let disp_weight = function(type, callback) {
+    //Show waste amount and percentage
+    await disp_weight(1)
+    await disp_weight(2)
 
-    $.ajax({
-        url: "/get_weight",   //url location of request handler
-        type: "POST",   //Type of request
-        data: { trash_type : type },
-        dataType: "json",
-        success: response => {  //If a response is received from server
-            callback(response.weight);
-        }
-    });
-
-}
-
-//trash percentage
-let get_percentage = function() {
-
-    let g_weight = parseFloat(document.getElementById("gw_value").innerHTML);
-    let r_weight = parseFloat(document.getElementById("rw_value").innerHTML);
-
-    console.log(g_weight, r_weight);
-    document.getElementById("percentage").innerHTML = (r_weight/(r_weight + g_weight)*100).toFixed(2).toString() + '%';
-
-}
+    //Get data for edit table
+    await get_trash_data(1);
+    await get_trash_data(2);
+});
 
 //display general waste
-disp_weight(1, function(weight) {
-    document.getElementById("gw_value").innerHTML = weight;
-});
+async function disp_weight(type){
+    let url = '/get_weight/' + type
+    response = await fetch(url);
+    let res = await response.json();
 
-//display recyclable waste
-disp_weight(2, function(weight) {
-    document.getElementById("rw_value").innerHTML = weight;
+    weight = parseFloat(res.weight)
 
-    get_percentage();
-});
+    if(type == 1){
+        document.getElementById("gw_value").innerHTML = weight;
+    } else{
+        document.getElementById("rw_value").innerHTML = weight;
+    }
+
+    r_weight = parseInt($('#rw_value').text());
+    g_weight = parseInt($('#gw_value').text());
+
+    $("#percentage").html((r_weight/(r_weight + g_weight)*100).toFixed(2).toString() + '%');
+
+}
 
 //add entry for general waste
-let add_g_weight = function() {
+async function add_weight(ele, type) {
 
-    let g_weight = parseFloat(document.getElementById("input_add_gw").value);
+    let weight = ele.val()
     
     $.ajax({
         url: "/add_trash_entry",
         type: "POST",
-        data: { weight : g_weight , trash_type : 1 },
-        dataType: "json",
-        success: response => {  
+        data: { weight : parseFloat(weight) , trash_type : type },
+        dataType: "json"})
+        .done(async response => {  
             if(response.status == "success"){
-                window.location.href = "Main.html";
+                // window.location.href = "Main.html";
+                await get_trash_data(type);
+                await disp_weight(type)
+                ele.val('')
+
             }
-        }
-    });
-    
+        })
 }
-
-//add entry for recyclable waste
-let add_r_weight = function() {
-
-    let r_weight = parseFloat(document.getElementById("input_add_rw").value);
-
-    $.ajax({
-        url: "/add_trash_entry",
-        type: "POST",
-        data: { weight : r_weight , trash_type : 2 },
-        dataType: "json",
-        success: response => {  
-            if(response.status == "success"){
-                window.location.href = "Main.html";
-            }
-        }
-    });
-
-}
-
-$(document).ready(function () {
-    get_leaderboard_data(time = 'current');
-    get_leaderboard_data(time = 'previous');
-
-    get_my_accommodation_data(time = 'current');
-    get_my_accommodation_data(time = 'previous');
-
-});
 
 async function get_leaderboard_data(time = 'current'){
 
@@ -130,7 +101,7 @@ async function get_leaderboard_data(time = 'current'){
     //Delete existing rows
     table.find('tbody tr').remove();
     //Add the rows
-    table.find("tbody").after(html);
+    table.find("tbody").append(html);
 
 }
 
@@ -153,45 +124,174 @@ async function get_my_accommodation_data(){
 
     let html = ""
     let rank = res.ranking
-    let position = rank.position
-    ticket_award = 100 - (position - 1) *10
+    let position = res.position
+    let last_next = res.last_next
 
+    let start_position = position
 
-    html += `<tr style= "background-color: white; color: #000;">\
-    <td> ${position}</td>\
-    <td> ${ticket_award}</td>\
-    <td> ${rank.name}</td>\
-    <td> ${(rank.percentage*100).toFixed(2)}% </td>\
-    <td> ?? </td>\
-    </tr>`
+    //have last position
+    if (last_next[0]){
+        start_position -= 1
+    }
+
+    for (accom of rank){
+        ticket_award = 100 - Math.min(100, (start_position - 1) *10)
+
+        html += `<tr style= "background-color: white; color: #000;">\
+        <td> ${start_position}</td>\
+        <td> ${ticket_award}</td>\
+        <td> ${accom.name}</td>\
+        <td> ${(accom.percentage*100).toFixed(2)}% </td>\
+        <td> ?? </td>\
+        </tr>`
+
+        start_position += 1
+    }
 
     //add after the last row
     table.find("tr:last").after(html);
 }
 
 
+function open_edit(ele){
+    //current row
+    let weight_td = $(ele).closest('tr')
+    //Make a new row, with a input field, save and cancel button
+    let html = "<tr>"
+    html += `<td><input style='width: 70px' type="number" placeholder = ${weight_td.find('td:eq(0)').text()}></input></td>`
+    html += `<td class='d-none'>${weight_td.find('td:eq(1)').text()}</td>`
+    html += `<td>${weight_td.find('td:eq(2)').text()}</td>`
+    html += `<td class='d-none'>${weight_td.find('td:eq(3)').text()}</td>`
+    html += `<td><button onclick="save_edit(this)"> Save </button></td>`
+    html += `<td><button onclick="cancel_edit(this)"> Cancel </button></td>`
+    html += "</tr>"
 
-function add(number, element){
-	
-	element.text(parseFloat(element.text()) + parseFloat(number));
+    weight_td.after(html)
+
+    //focus the input
+    weight_td.next().find('td:eq(0)').find('input').focus()
+
+    //Hide the current row
+    weight_td.addClass('d-none')
+}
+
+function cancel_edit(ele){
+
+    let weight_td = $(ele).closest('tr')
+    let prev_weight_td = weight_td.prev()
+
+    prev_weight_td.removeClass('d-none')
+    weight_td.remove()
 
 }
 
-function replace(number, element){
-	
-	element.text(parseFloat(number));
+//1 is general
+//2 is recyclable
+//Show data when loaded the percentage, call this function at document.ready (top)
+async function get_trash_data(type){
+
+    let url = '/get_trash_data/' + type
+    response = await fetch(url);
+
+    if(type == 1){
+        table = $('#edit_gw_table');
+    } else {
+        table = $('#edit_rw_table');
+    }
+
+    let res = await response.json()
+    let html = ""
+
+    for (row of res.result){
+        
+        let weight = row.weight
+        let type = row.trash_type_id
+        let temp = new Date(row.time_added)
+        let time = temp.toDateString()
+        let trash_id = row.id
+
+        html += `<tr>\
+        <td> ${weight}</td>\
+        <td class = 'd-none'> ${type}</td>\
+        <td> ${time}</td>\
+        <td class = 'd-none'>${trash_id}</td>\
+        <td><button onclick="open_edit(this)"> Edit </button></td>
+        <td><button onclick="delete_row(this)"> Remove </button></td>
+        </tr>`
+    }
+    //Delete existing rows
+    table.find('tbody').html("")
+    //Add the rows
+    table.find("tbody").append(html);
 
 }
 
+//update the entered new value
+async function save_edit(ele){
 
-//show measure value in the table
-$('#gw_button').on('click', function(){
+    //the row of this cell
+    let weight_td = $(ele).closest('tr')
+    let weight = weight_td.find('td:eq(0)').find('input').val()
+    //'General'/'Recyclable'
+    let type =  weight_td.find('td:eq(1)').text()
+    let trash_id = parseInt(weight_td.find('td:eq(3)').text())
 
-    $('#gw_value_modal').text($("#gw_value").text() + $("#gw_unit").text());
-});
+    if(weight == ''){
+        alert('no weight entered')
+    }
+
+    $.ajax({
+        url: "/update_trash_entry",
+        type: "POST",
+        data: { id : trash_id , new_weight : parseInt(weight) },
+        dataType: "json"})
+        .done(async response => { 
+            if(response.status == "success"){
+                // window.location.href = "Main.html";
+                get_trash_data(type)
+                disp_weight(type);
+
+            }
+        })
+
+}
+
+let delete_row = function(ele) {
+    let weight_td = $(ele).closest('tr')
+    let trash_id = parseInt(weight_td.find('td:eq(3 )').text())
 
 
-$('#rw_button').on('click', function(){
+    $.ajax({
+        url: "/remove_trash_entry",
+        type: "POST",
+        data: { id : trash_id },
+        dataType: "json",
+        success: response => {  
+            if(response.status == "success"){
+                // window.location.href = "Main.html";
+                let type =  weight_td.find('td:eq(1)').text()
+                if(type == 1){
+                    table = $('#edit_gw_table');
+                } else {
+                    table = $('#edit_rw_table');
+                }
+                table.find('tbody tr').remove();
 
-    $('#rw_value_modal').text($("#rw_value").text() + $("#rw_unit").text());
+                setTimeout(function(){
+                    get_trash_data(type)
+                    disp_weight(type);
+                },200)
+
+            }
+        }
+    });
+}
+
+
+
+$("#log-out").on('click', async function(event) {
+    event.preventDefault();
+    window.location = "../Site/Login.html";
+    await fetch('/logout_user');
+
 });

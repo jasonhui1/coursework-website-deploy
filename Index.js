@@ -12,14 +12,25 @@ const app = express();
 const file_router = require('./FileConnection.js');
 app.use(file_router);
 
-const trash = require('./Trash.js');
+const trash = require('./Server/Trash.js');
 app.use(trash)
 
-const leaderboard_router = require('./Leaderboard.js');
+const leaderboard_router = require('./Server/Leaderboard.js');
 app.use(leaderboard_router)
 
-const submission = require('./Submission.js');
+const submission = require('./Server/Submission.js');
 app.use(submission);
+
+const session = require('express-session');
+app.use(session({
+  secret: process.env.SECURE_KEY,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { 
+    // secure: true 
+    maxAge: 20
+  }
+}))
 
 //Can request data correctly
 const bodyParser = require('body-parser');
@@ -36,8 +47,8 @@ app.listen(port, () => console.log(`listening at ${port}`));
 app.use('/static', express.static('Website'));
 
 //other files
-const user = require('./User.js')
-const accom = require('./Accommodation.js')
+const user = require('./Server/User.js')
+const accom = require('./Server/Accommodation.js')
 
 //CHECK LOGIN
 app.post('/login_user', user.login_in_user, (request, response) => {
@@ -60,6 +71,19 @@ app.post('/register_user', async (request, response) => {
   // response.json({
   //   status: 'success'
   // })
+})
+
+
+app.get('/logout_user', async (request, response) => {
+
+
+    if(user.logout_user(request.session.user)){
+      request.session.destroy();
+
+    } else {
+      console.log("failed logout user")
+    }
+
 })
 
 

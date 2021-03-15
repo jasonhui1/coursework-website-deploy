@@ -16,8 +16,6 @@ app.use(express.json({ limit: '3mb' }));
 
 const {get_current_raffle,query_last_raffle,query_current_raffle} = require('./Raffle.js')
 
-
-
 let accom_id_name_map = [];
 
 //map id and name into an array
@@ -129,12 +127,15 @@ async function query_sum_accom_trash(_round, array){
 }
 
 //sum the amount of trash of all accommodations, stored in the accommodation_trash_current array
-async function sum_trash(){
+async function sum_trash(time){
 
-  let round = await query_current_raffle()
-  await query_sum_accom_trash(round, accommodation_trash_current)
-  let last_round = await query_last_raffle()
-  await query_sum_accom_trash(last_round, accommodation_trash_previous)
+  if (time == 'current'){
+    let round = await query_current_raffle()
+    await query_sum_accom_trash(round, accommodation_trash_current)
+  } else {
+    let last_round = await query_last_raffle()
+    await query_sum_accom_trash(last_round, accommodation_trash_previous)
+  }
 
 }
 
@@ -171,7 +172,35 @@ function get_my_accommodation_ranking(id, time = 'current'){
   }
 
   let position = 0
-  let last_percentage = 10000
+  // let last_percentage = 10000
+
+  for (i = 0; i < array.length; i++){
+    row = array[i]
+
+    //if equal (comment for now)
+    // if(row.percentage < last_percentage){
+    //   position += 1
+    // } 
+    position += 1
+
+    if(row.id == id){
+
+      last_pos_exist = true
+      next_pos_exist = true
+
+      if (0 > i-1){
+        last_pos_exist = false
+      }
+
+      if( i + 2 > array.length){
+        next_pos_exist = false
+      }
+
+      return [array.slice(Math.max(0,i-1), Math.min(i+2, array.length)),position, [last_pos_exist, next_pos_exist]];
+    }
+
+    // last_percentage = row.percentage
+  }
 
   for (row of array){
 
@@ -190,14 +219,28 @@ function get_my_accommodation_ranking(id, time = 'current'){
 }
 
 //run these functions when the server starts
-async function initialise_accommodation(){
 
-  await get_accommodation_id_name_map()
+async function initialise(){
+    await get_accommodation_id_name_map()
+    await calculate_current_leaderboard()
+    await calculate_previous_leaderboard()
+
+}
+
+async function calculate_current_leaderboard(){
+
+  ranking_current = []
   accommodation_trash_current = Array(accom_id_name_map.length).fill().map(x => new Accommodation_trash(0,0))
-  accommodation_trash_previous = Array(accom_id_name_map.length).fill().map(x => new Accommodation_trash(0,0))
-  await sum_trash()
+  await sum_trash('current')
 
   rank_accommodation(accommodation_trash_current, ranking_current);
+}
+
+async function calculate_previous_leaderboard(){
+
+  accommodation_trash_previous = Array(accom_id_name_map.length).fill().map(x => new Accommodation_trash(0,0))
+  await sum_trash('previous')
+
   rank_accommodation(accommodation_trash_previous, ranking_previous);
 
 }
@@ -212,9 +255,12 @@ function get_ranking_previous(){
   return ranking_previous;
 }
 
+
 module.exports = {
-    
-    initialise_accommodation,
+
+    initialise,
+    calculate_current_leaderboard,
+    calculate_previous_leaderboard,
     get_accommodation_name,
     get_accommodation_id,
     get_ranking_current,

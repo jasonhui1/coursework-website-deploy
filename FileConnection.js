@@ -3,7 +3,7 @@ const fs   = require('fs');
 const path = require("path");
 const express = require('express');
 const router = express.Router()
-const {auth_user} = require('./User.js')
+const {auth_user} = require('./Server/User.js')
 const session = require('express-session');
 require('dotenv').config();
 
@@ -31,8 +31,8 @@ router.get('/Site/:filepath', (request, response) => {
 	if(param == "Main.html"){
 	  console.log("Main Access")
   
-	  console.log("WHEN ACCESS MAIN SESSION ")
-	  console.log(request.session)
+	//   console.log("WHEN ACCESS MAIN SESSION ")
+	//   console.log(request.session)
 	  //Check if this user is logged in or not
 	  if(typeof request.session !== 'undefined' && typeof request.session.user !== 'undefined'){
 		let logged_in = auth_user(request.session.user.id, request.session.user.user_name)

@@ -1,4 +1,26 @@
 @charset "utf-8";
+
+:root {  /*colors*/
+
+	--background: #18a964;
+
+	--leaderboard-section-background: #acf3d1;
+
+	--leaderboard-top: #24df86;
+	--leaderboard-border: #24df86;
+	--leaderboard-head: #22c276;
+	--leaderboard-odd: #22c276;
+	--leaderboard-even: #18a964;
+	--leaderboard-top-text: white;
+	--leaderboard-text: white;
+	--leaderboard-divider: white;
+	;
+
+	--header-text: white;
+	--middle-h2: #18a964;
+
+}
+
 /* CSS Document */
 * {
 	margin: 0;
@@ -10,7 +32,7 @@ body {
 }
 
 #log-out{
-	color:#fff;
+	color: var(--header-text);
 }
 
 h1  {
@@ -23,9 +45,9 @@ h2 {
 	font-family: 'Helvetica Neue', sans-serif; 
 	font-size: 50px; 
 	font-weight: bold; 
-	letter-spacing: -1px; line-height: 1; 
-	text-align: center; 
-	text-shadow: 1px 1px #18a964;
+	letter-spacing: -1px; 
+	line-height: 1; 
+	text-shadow: 2px 2px #147c4a;
 	padding: 20px;
 }
 
@@ -61,46 +83,7 @@ h2 {
 	border: 2px solid gray;
 	width: 50%;	
 }
- .leaderboard caption{
-	font-size : 25px;
-	background-color: greenyellow;
-	text-align:left;
-	border-top-left-radius:6px;
-	border-top-right-radius: 6px;
-	-moz-border-top-left-radius:6px;
-	-moz-border-top-right-radius:6px;
- }
- .leaderboard table{
-	margin-left: auto;
-	margin-right: auto;
-	width: 90%;
-	border: 3px solid greenyellow;
-	border-right-color: greenyellow;
-	border-right-width: 5px;
-	border-left-color: greenyellow;
-	border-left-width: 5px;
-	border-bottom-color: greenyellow;
-	border-bottom-width: 5px;
-	border-collapse: collapse;
-	border-bottom-left-radius:6px;
-	border-bottom-right-radius: 6px;
-	-moz-border-bottom-left-radius:6px;
-	-moz-border-bottom-right-radius:6px;
-	margin: 30px;
- }
- .leaderboardTable th{
-	background-color:green; 
-	color:white;
- }
 
- .leaderboardTable tr{
-	border: 2px solid white;
-	width: 50%;	
- }
- .leaderboardTable tr:nth-child(even){
-	background-color: lightgreen;
-	color: #fff;
-  }
 
 .middle-section {
 	background-image: url("../images/main-section.jpg");
@@ -110,20 +93,39 @@ h2 {
   	background-repeat: no-repeat; /* Do not repeat the image */
   	background-size: cover; /* Resize the background image to cover the entire container */
   	margin-top: 0px;
+  	text-align: center;
+}
+
+#logo {
+	width: 25%;
+
+
 }
 
 
 /*prize section 'cards' */
 .prize-section div{
 	overflow: visible;
-	padding: 10px;
+	padding: 0px;
 	margin-right: 20px;
 	margin-left: 20px;
+	margin-bottom: 10px;
 } 
+
+.prize-section img {
+	position: relative;
+	object-fit: contain;
+	margin: 1px;
+	width: 300px;
+	height: 200px;
+	float: middle;
+	margin-right: 25px;
+}
 #left {
 	float:left; 
 	width:50%;
-	height:200px;
+	height:contain;
+	overflow: auto;
 }
 #right { 
 	overflow: auto;
@@ -138,26 +140,6 @@ h2 {
 	}
 }
 
-  
-/* Responsive columns - one column layout (vertical) on small screens */
-/*@media screen and (min-width: 600px) {
-	.column {
-		float: none
-		width: 100%;
-	  	display: block;
-		margin-bottom: 20px;
-	}
-}  */
-/* Clear floats after the columns */
-/*.prizeSection:after {
-	content: "";
-	display: table;
-	clear: both;
-}
-  */
-
-
-
   /* Style the counter cards */
 
 .prize {
@@ -171,9 +153,9 @@ h2 {
 } 
 
 .prizeImage {
-	background: white no-repeat center;
-	background-image: url('../images/prizeImage.jpg');
-	background-size: contain;
+	/*background: white no-repeat center;*/
+	/*background-image: url('../images/prizeImage.jpg');*/
+	/*background-size: contain;*/
 }
 
 .prizeDescription {
@@ -206,9 +188,53 @@ h2 {
 }
 
 .leaderboard {
-	background-color: #18a964;
+	background-color: var(--leaderboard-section-background);
 	padding-left: 16px;
 
+}
+
+.leaderboard caption{
+	font-size : 25px;
+	color: var(--leaderboard-top-text);;
+	background-color: var(--leaderboard-top);
+	text-align:left;
+	border-top-left-radius:6px;
+	border-top-right-radius: 6px;
+	-moz-border-top-left-radius:6px;
+	-moz-border-top-right-radius:6px;
+}
+
+.leaderboard table{
+	margin-left: auto;
+	margin-right: auto;
+	width: 90%;
+	border: 3px solid var(--leaderboard-border);
+	border-right-color: var(--leaderboard-border);
+	border-right-width: 5px;
+	border-left-color: var(--leaderboard-border);
+	border-left-width: 5px;
+	border-bottom-color: var(--leaderboard-border);
+	border-bottom-width: 5px;
+	border-collapse: collapse;
+	border-bottom-left-radius:6px;
+	border-bottom-right-radius: 6px;
+	-moz-border-bottom-left-radius:6px;
+	-moz-border-bottom-right-radius:6px;
+	margin: 30px;
+}
+.leaderboardTable th{
+	background-color:var(--leaderboard-head); 
+	color:white;
+}
+
+.leaderboardTable tr{
+ 	background-color: var(--leaderboard-odd);
+	border: 2px solid var(--leaderboard-divider);;
+	color: var(--leaderboard-top-text);
+	width: 50%;	
+}
+.leaderboardTable tr:nth-child(even){
+	background-color: var(--leaderboard-even);
 }
 
 .submission {
@@ -242,7 +268,6 @@ h2 {
 	width: 100%;
 	background-image: url("../images/login-background.jpeg");
 	filter: blur(8px);
-
 	background-position: center;
 	background-size: cover;
 	position: absolute;
@@ -332,8 +357,19 @@ h2 {
 	border-radius: 30px;
 }
 
+.submit-btn:hover,
+.submit-btn:focus {
+	background: linear-gradient(to right, #18a963c8, #36efa5db);
+	text-decoration: none;
+	cursor: pointer;
+}
+
 .check-box {
 	margin: 30px 10px 30px;
+}
+
+.reg-box {
+	margin: 10px 10px 30px;
 }
 
 .remember-password {
@@ -343,11 +379,18 @@ h2 {
 	position: absolute;
 }
 
-.terms-conditions {
+.cd-check-box {
 	color: #777;
+	font-size: 70%;
+	text-align: justify;
+}
+
+.terms-conditions {
+	color: rgb(48, 154, 190);
 	font-size: 12px;
 	bottom: 68px;
 	position: absolute;
+	text-decoration: underline;
 }
 
 #login{
@@ -369,4 +412,119 @@ h3 {
     cursor: default;
 }
 
+h4 { 
+	text-transform:uppercase;
+	padding-top: 30px;
+	color: #18a964; 
+	font-family: 'Fredoka One', sans-serif; 
+	font-size: 1.5em;
+  	text-align: center;
+  	position: relative;
+  	transform: translateY(-20%);
+    cursor: default;
+}
 
+  
+  /* The popup form - hidden by default */
+.form-pop-up {
+	display: none; /* Hidden by default */
+  	position: fixed; /* Stay in place */
+  	z-index: 1; /* Sit on top */
+  	left: 0;
+  	top: 0;
+  	width: 100%; /* Full width */
+  	height: 100%; /* Full height */
+  	overflow: auto; /* Enable scroll if needed */
+  	background-color: rgb(0,0,0); /* Fallback color */
+  	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+}
+
+.pop-up-body{
+	padding-top: 30px;
+	padding-right: 50px;
+	padding-left: 50px;
+	padding-bottom: 10px;
+	font-size: 14px;
+	text-align: justify;	
+}
+
+.mdiv {
+	height: 25px;
+	width: 2px;
+	margin-left: 12px;
+	background-color: black;
+	transform: rotate(45deg);
+	Z-index: 1;
+}
+
+.md {
+	height: 25px;
+	width: 2px;
+	background-color: black;
+	transform: rotate(90deg);
+	Z-index: 2;
+}
+
+  
+  /* Add styles to the form container */
+  .form-container {
+	padding: 10px;
+	text-align: center;
+	background-color: rgba(255, 255, 255, 0.846);
+	margin: 15% auto; /* 15% from the top and centered */
+	border: 1px solid #888;
+	overflow: auto;
+	border-radius: 30px;
+	max-width: 40%; /* Could be more or less, depending on screen size */
+	max-height: 40%;
+  }
+  
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.gallery-item {
+    position: relative;
+    flex: 1 0 22rem;
+    margin: 1rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+.gallery-item:hover .item-description,
+.gallery-item:focus .item-description{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+	width:800px;
+	height:800px;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.gallery-item:hover .text-description{
+	font-size: 25px;
+	color: #fff;
+	position:absolute;
+	visibility: visible;
+}
+.text-description{
+	visibility: hidden;
+}
+
+.gallery-image {
+	width:800px;
+	height:800px;
+    object-fit: cover;
+}
+
+@supports (display: grid) {
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(22rem,1fr));
+        grid-gap: 1rem;
+    }
+}
+	

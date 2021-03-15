@@ -14,7 +14,10 @@ app.use(session({
     secret: process.env.SECURE_KEY,
     resave: false,
     saveUninitialized: true,
-    // cookie: { secure: true }
+    cookie: { 
+      // secure: true 
+      maxAge: 20
+    }
 }))
 
 app.use(express.json({ limit: '3mb' }));
@@ -83,10 +86,16 @@ async function login_in_user(request, response, next){
   if(await bcrypt.compare(request.body.password, result[0].password)){
       console.log("RIGHT")
 
-      user = {"id": result[0].id, "user_name": result[0].user_name, "accommodation_id": result[0].user_accommodation_id};
+      user = {"id": result[0].id, "user_name": result[0].user_name, "accommodation_id": result[0].user_accommodation_id, "sesson_id": request.sessionID};
       users.push(user)
 
       request.session.user = user
+
+      //req 1.3, session expires in 15 mins (after login in)
+      let expire_time = 1000*60*15
+      request.session.cookie.maxAge = expire_time
+      console.log()
+
       next()
       return
 
@@ -98,6 +107,21 @@ async function login_in_user(request, response, next){
       return
   }
 }
+
+function logout_user(current_user){
+
+
+    for (i = 0; i < users.length; i++){
+      user = users[i]
+      console.log(current_user)
+      if (current_user.id == user.id && current_user.user_name == user.user_name){
+        users.pop(i)
+        return true
+      }
+    }
+
+    return false
+}
   
 
 module.exports = {
@@ -105,5 +129,6 @@ module.exports = {
     users,
     auth_user,
     register_user,
-    login_in_user
+    login_in_user,
+    logout_user
 }

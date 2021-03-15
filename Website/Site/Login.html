@@ -44,7 +44,7 @@
             <!--Log in input fields and submit-->
             <form id="login" class="input-group" onsubmit="loginUser(event)">
                 <input type="text" class="input-field" name="user_name" placeholder="User ID or Email Address" autofocus required>
-                <input type="text" class="input-field" name="password" placeholder="Password" required>
+                <input type="password" class="input-field" name="password" placeholder="Password" required>
                 <input type="checkbox" class="check-box"><span class="remember-password">Remember Password</span>
                 <button type="submit" class="submit-btn">Login</button>
             </form>
@@ -59,28 +59,188 @@
                 <select class="input-field" id="accomodations"  name = "accommodation" placeholder="Choose accomodation" required>
                     <option disabled hidden selected>Select Accomodation</option>
                     <optgroup label="On Campus">
-                        <option value="Brendon Court">Brendon Court</option>
-                        <option value="Marlborough Court and Solsbury Court">Marlborough Court and Solsbury Court</option>
-                        <option value="Norwood House">Norwood House</option>
-                        <option value="Eastwood">Eastwood</option>
-                        <option value="Eastwood 1">Eastwood 1</option>
-                        <option value="Osborne House">Osborne House</option>
-                        <option value="Polden">Polden</option>
-                        <option value="Polden Court">Polden Court</option>
-                        <option value="The Quads">The Quads</option>
-                        <option value="Westwood">Westwood</option>
-                        <option value="Woodland Court">Woodland Court</option>
+                        <optgroup label="Norwood House" class="sub-dropbox">Norwood House</optgroup>
+                            <option value="Norwood 1">N1</option>
+                            <option value="Norwood 2">N2</option>
+                            <option value="Norwood 3">N3</option>
+                            <option value="Norwood 4">N4</option>
+                        <optgroup label="Eastwood" class="sub-dropbox">Eastwood</optgroup>
+                            <option value="Eastwood 1">E1</option>
+                            <option value="Eastwood 2">E2</option>
+                            <option value="Eastwood 3">E3</option>
+                            <option value="Eastwood 4">E4</option>
+                        <optgroup label="Brendon Court" class="sub-dropbox"><h5>Brendon Court</h5></optgroup>
+                            <option value="QC1">QC1</option>
+                            <option value="QC2">QC2</option>
+                            <option value="QC3">QC3</option>
+                            <option value="QC4">QC4</option>
+                        <optgroup label="Marlborough Court and Solsbury Court" class="sub-dropbox">Marlborough Court and Solsbury Court</optgroup>
+                            <option value="QC1">QC1</option>
+                            <option value="QC2">QC2</option>
+                            <option value="QC3">QC3</option>
+                            <option value="QC4">QC4</option>
+
+                        <optgroup label="Osborne House" class="sub-dropbox">Osborne House</optgroup>
+                            <option value="QC1">QC1</option>
+                            <option value="QC2">QC2</option>
+                            <option value="QC3">QC3</option>
+                            <option value="QC4">QC4</option>
+                        <optgroup label="Polden" class="sub-dropbox">Polden</optgroup>
+                            <option value="QC1">QC1</option>
+                            <option value="QC2">QC2</option>
+                            <option value="QC3">QC3</option>
+                            <option value="QC4">QC4</option>
+                        <optgroup label="Polden Court" class="sub-dropbox">Polden Court</optgroup>
+                            <option value="QC1">QC1</option>
+                            <option value="QC2">QC2</option>
+                            <option value="QC3">QC3</option>
+                            <option value="QC4">QC4</option>
+                        <optgroup label="The Quads" class="sub-dropbox">The Quads</optgroup>
+                            <option value="QC1">QC1</option>
+                            <option value="QC2">QC2</option>
+                            <option value="QC3">QC3</option>
+                            <option value="QC4">QC4</option>
+                        <optgroup label="Westwood" class="sub-dropbox">Westwood</optgroup>
+                            <option value="QC1">QC1</option>
+                            <option value="QC2">QC2</option>
+                            <option value="QC3">QC3</option>
+                            <option value="QC4">QC4</option>
+                        <optgroup label="Woodland Court" class="sub-dropbox">Woodland Court</optgroup>
+                            <option value="QC1">QC1</option>
+                            <option value="QC2">QC2</option>
+                            <option value="QC3">QC3</option>
+                            <option value="QC4">QC4</option>
                     </optgroup>
                     <optgroup label="Off Campus">
-                        <option value="Carpenter House">Carpenter House</option>
-                        <option value="John Wood Building">John Wood Building</option>
-                        <option value="John Wood Court">John Wood Court</option>
-                        <option value="Green Park House">Green Park House</option>
+                        <optgroup label="Carpenter House" class="sub-dropbox">Carpenter House</optgroup>
+                            <option value="QC1">QC1</option>
+                            <option value="QC2">QC2</option>
+                            <option value="QC3">QC3</option>
+                            <option value="QC4">QC4</option>
+                        <optgroup label="John Wood Building" class="sub-dropbox">John Wood Building</optgroup>
+                            <option value="QC1">QC1</option>
+                            <option value="QC2">QC2</option>
+                            <option value="QC3">QC3</option>
+                            <option value="QC4">QC4</option>
+                        <optgroup label="John Wood Court" class="sub-dropbox">John Wood Court</optgroup>
+                            <option value="QC1">QC1</option>
+                            <option value="QC2">QC2</option>
+                            <option value="QC3">QC3</option>
+                            <option value="QC4">QC4</option>
+                        <optgroup label="Green Park House" class="sub-dropbox">Green Park House</optgroup>
+                            <option value="QC1">QC1</option>
+                            <option value="QC2">QC2</option>
+                            <option value="QC3">QC3</option>
+                            <option value="QC4">QC4</option>
                     </optgroup>
                 </select>
 
-                <input type="checkbox" class="check-box"><span class="terms-conditions">I agree to the Terms & Conditions</span>
-                <button type="submit" class="submit-btn">Register</button>
+                <input type="checkbox" class="check-box"><span class="terms-conditions" onclick="openForm()">I agree to the Terms & Conditions</span>
+                <button type ="button" id="register_btn" class="submit-btn" onclick="registerCDPopUp()">Register</button>
+                <!--pop up box with the terms and conditions-->
+                <div class="form-pop-up" id="myForm">
+                    <div class="form-container">
+                        <div id="mdiv" onclick="closeForm()">
+                            <div class="mdiv">
+                                <div class="md"></div>
+                            </div>
+                        </div>
+                        <h4>Terms and Conditions</h4>
+                        <div class="pop-up-body">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="form-pop-up" id="cheat-det">
+                    <div class="form-container">
+                        <h4>Show some love to your competitor</h4>
+                        <div class="pop-up-body">
+                        <p>
+                            Thank you for participating in Baffle, we are glad that you are here! Please take your time to read the text below for everyones benefit. 
+                            <br><br>We take cheating seriously just like anyone else. So for everyone participating in Baffle, please be truthful when submitting weight 
+                            of your trash. You would not want anyone else to best you with unethical methods so do not do the same to someone else. Appropraite actions
+                            will be taken against bad actors. So respect each other.<br><br>
+                            Once again thank you for coming to Baffle and go ahead and get started!
+                        </p>
+                        </div>
+                        <input type="checkbox" class="reg-box" onclick="enableCont()"><span class="cd-check-box">I have read and understand</span>
+                        <button type="submit" class="submit-btn" id="continue" disabled="disabled" >Register</button>
+                    </div>
+                </div>
             </form>
         </div>
 
@@ -95,7 +255,23 @@
 
     var a = document.getElementById("login-top");
     var b = document.getElementById("register-top");
+
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+        document.getElementById("wrapper").style.filter = blur("8px");
+    }
+      
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
     
+    function registerCDPopUp(){
+        document.getElementById("cheat-det").style.display = "block";
+    }
+    
+    function enableCont(){
+        document.getElementById("continue").disabled = !document.getElementById("continue").disabled;
+    }
 
     //Switches to register field
     function register(){

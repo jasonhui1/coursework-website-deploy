@@ -27,7 +27,7 @@
 
 	<!-- right items of navigation bar -->
 	<div class="navbar-right">
-		<a href="#" id="log-out"><span><i class="fas fa-sign-out-alt" ></i>Log out</span></a>
+		<a href="" id="log-out"><span><i class="fas fa-sign-out-alt" ></i>Log out</span></a>
 	</div>
 
 </div>
@@ -39,11 +39,12 @@
 		<h2> THIS RAFFLE'S PRIZE </h2>
 
 		<div class="prize-section">
-			<div id="left" class="prize prizeImage"></div>
+			<div id="left" class="prize prizeImage"><img src="../images/prizeImage.jpg" alt="Prize"></div>
 			<!--The prize description-->
 			<div id="right" class="prize prizeDescription">
+				
 				<p1>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+					Pizza ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
 					labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
 					laboris nisi ut aliquip ex ea commodo consequat.
 					Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
@@ -75,6 +76,47 @@
 					<td>65%</td>
 					<td>2100</td>
 				</tr>
+				<tr>
+					<td>2</td>
+					<td>100</td>
+					<td>Cotswold</td>
+					<td>65%</td>
+					<td>2100</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>100</td>
+					<td>Cotswold</td>
+					<td>65%</td>
+					<td>2100</td>
+				</tr>
+
+				<tr style= "background-color: white; color: #000;">
+					<td> before_you</td>
+					<td> ??</td>
+					<td> Accom name</td>
+					<td> XX% </td>
+					<td> ?? </td>
+				</tr>
+
+				<tr style= "background-color: white; color: #000;">
+					<td> you</td>
+					<td> ??</td>
+					<td> Accom name</td>
+					<td> XX% </td>
+					<td> ?? </td>
+				</tr>
+
+				<tr style= "background-color: white; color: #000;">
+					<td> after you</td>
+					<td> ??</td>
+					<td> Accom name</td>
+					<td> XX% </td>
+					<td> ?? </td>
+				</tr>
+
+				
+
 			</tbody>
 		</table>
 
@@ -96,6 +138,43 @@
 						<td>65%</td>
 						<td>2100</td>
 					</tr>
+					<tr>
+						<td>2</td>
+						<td>100</td>
+						<td>Cotswold</td>
+						<td>65%</td>
+						<td>2100</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>100</td>
+						<td>Cotswold</td>
+						<td>65%</td>
+						<td>2100</td>
+					</tr>
+	
+					<tr style= "background-color: white; color: #000;">
+						<td> before_you</td>
+						<td> ??</td>
+						<td> Accom name</td>
+						<td> XX% </td>
+						<td> ?? </td>
+					</tr>
+					<tr style= "background-color: white; color: #000;">
+						<td> before_you</td>
+						<td> ??</td>
+						<td> Accom name</td>
+						<td> XX% </td>
+						<td> ?? </td>
+					</tr>
+					<tr style= "background-color: white; color: #000;">
+						<td> before_you</td>
+						<td> ??</td>
+						<td> Accom name</td>
+						<td> XX% </td>
+						<td> ?? </td>
+					</tr>
+			
 				</tbody>
 			</table>
 		</table>
@@ -109,17 +188,17 @@
 			<tr>
 				<td>Amount of general rubbish</td>
 				<!--Need to make it so only when edit is pressed the content is editable, else cannot-->
-				<td contentEditable="false"><span id="gw_value"></span><span id="gw_unit">kg</span></td>
+				<td contentEditable="false"><span id="gw_value">50</span><span id="gw_unit">kg</span></td>
 				<!--Button should allow amount to be edited/updated to the database -->
-				<td><button type="button" id="gw_button" data-toggle="modal" data-target="#gw_modal">EDIT</button>
+				<td><button type="button" id="gw_button" data-toggle="modal" data-target="#edit_gw_modal">EDIT</button>
 				<td><button type="button" id="gw_add_button" data-toggle="modal" data-target="#add_gw_modal">ADD</button></td>
 			</tr>
 			<tr>
 				<td>Amount recycled this week</td>
 				<!--Need to make it so only when edit is pressed the content is editable, else cannot-->
-				<td contentEditable="false"><span id="rw_value"></span><span  id="rw_unit">kg</span></td>
+				<td contentEditable="false"><span id="rw_value">20</span><span  id="rw_unit">kg</span></td>
 				<!--Button should allow amount to be edited/updated to the database -->
-				<td><button type="button" id="rw_button" data-toggle="modal" data-target="#rw_modal">EDIT</button>
+				<td><button type="button" id="rw_button" data-toggle="modal" data-target="#edit_rw_modal">EDIT</button>
 				<td><button type="button" id="rw_add_button" data-toggle="modal" data-target="#add_rw_modal">ADD</button></td>
 
 			</tr>
@@ -130,7 +209,7 @@
 			<tr>
 				<td>Your total recycling percentages</td>
 				<!--Percentage from data -->
-				<td><span id="percentage"></span></td>
+				<td><span id="percentage">40%</span></td>
 			</tr>
 			<tr>
 				<td>Next rubbish collection date</td>
@@ -152,16 +231,21 @@
 					</button>
 				</div>
 
+				
+				<div class=cheat-deterrent-body>
+					<p>IMPORTANT!<br><br>We value fair competition between all participants in the Baffle.Hence, we implore you to think of your competitors and yourself. You wouldn't want someone to cheat you of of your victory so don't do the same to sommeone else.<br>If comes to our attention that cheating has taken place appropiate measures will be taken against the flat</p>
+				</div>
+
 				<div class="modal-body">
 					<!--database number -->
 					<label>Add </label>
-					<input type="number" id="input_add_gw">
+					<input type="number" id="input_add_gw" autofocus>
 				</div>
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					<!--update the new value into the database-->
-					<button class="btn btn-primary"  data-dismiss="modal" onclick= add_g_weight()>  Save changes</button>
+					<button class="btn btn-primary"  data-dismiss="modal" onclick= "add_weight($('#input_add_gw'), 1)">  Save changes</button>
 				</div>
 			</div>
 		</div>
@@ -178,22 +262,26 @@
 					</button>
 				</div>
 
+				<div class=cheat-deterrent-body>
+					<p>IMPORTANT!<br><br>We value fair competition between all participants in the Baffle.Hence, we implore you to think of your competitors and yourself. You wouldn't want someone to cheat you of of your victory so don't do the same to sommeone else.<br>If comes to our attention that cheating has taken place appropiate measures will be taken against the flat</p>
+				</div>
+
 				<div class="modal-body">
 					<!--database number -->
 					<label>Add </label>
-					<input type="number" id="input_add_rw">
+					<input type="number" id="input_add_rw" autofocus>
 				</div>
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					<!--update the new value into the database-->
-					<button class="btn btn-primary"  data-dismiss="modal" onclick= add_r_weight()>  Save changes</button>
+					<button class="btn btn-primary"  data-dismiss="modal" onclick= "add_weight($('#input_add_rw'), 2)">  Save changes</button>
 				</div>
 			</div>
 		</div>
 	</div>
 		
-	<div class="modal fade" id="gw_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="edit_gw_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -203,17 +291,59 @@
 					</button>
 				</div>
 
+				<div class=cheat-deterrent-body>
+					<p>IMPORTANT!<br><br>We value fair competition between all participants in the Baffle.Hence, we implore you to think of your competitors and yourself. You wouldn't want someone to cheat you of of your victory so don't do the same to sommeone else.<br>If comes to our attention that cheating has taken place appropiate measures will be taken against the flat</p>
+				  </div>
+
 				<div class="modal-body">
-					<!--database number -->
-					<label class="d-block">Measured <span id = "gw_value_modal">15kg </span> </label>
-					<label>New measurement: </label>
-					<input type="number" id="input_edit_gw">
+					<table class="leaderboardTable">
+						<table class="leaderboardTable col-12" id = "edit_gw_table">
+							<caption style="caption-side: top">This Raffle Period</caption>
+							<thead>
+								<th>Weight</th>
+								<th class='d-none'>Type</th>
+								<th >Last updated</th>
+								<th></th>
+								<th></th>
+								<!-- Use to access the id in the database -->
+								<th class='d-none'>id</th>
+							</thead>
+							<tbody>
+								<tr>
+									<td>101</td>
+									<td class='d-none'>1</td>
+									<td>19-02-21</td>
+									<!-- hide: trash id -->
+									<td class='d-none'>1</td>
+									<td><button onclick="open_edit(this)"> Edit </button></td>
+									<td><button onclick="delete_row(this)"> Remove </button></td>
+								</tr>
+								<tr>	
+									<td>201</td>
+									<td class='d-none'>1</td>
+									<td>19-02-21</td>
+									<!-- hide: trash id -->
+									<td class='d-none'>2</td>
+									<td><button onclick="open_edit(this)"> Edit </button></td>
+									<td><button onclick="delete_row(this)"> Remove </button></td>
+								</tr>
+								<tr>
+									<td>301</td>
+									<td class='d-none'>1</td>
+									<td>19-02-21</td>
+									<!-- hide: trash id -->
+									<td class='d-none'>3</td>
+									<td><button onclick="open_edit(this)"> Edit </button></td>
+									<td><button onclick="delete_row(this)"> Remove </button></td>
+								</tr>
+							</tbody>
+						</table>
+					</table>
 				</div>
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<!--update the new value into the database-->
-					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick= "replace($('#input_edit_gw').val(), $('#gw_value'))">Save changes</button>
+
 				</div>
 			</div>
 		</div>
@@ -221,7 +351,7 @@
 		
 		
 		
-	<div class="modal fade" id="rw_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="edit_rw_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -231,17 +361,63 @@
 					</button>
 				</div>
 
+				<div class=cheat-deterrent-body>
+					<p>IMPORTANT!<br><br>We value fair competition between all participants in the Baffle.Hence, we implore you to think of your competitors and yourself. You wouldn't want someone to cheat you of of your victory so don't do the same to sommeone else.<br>If comes to our attention that cheating has taken place appropiate measures will be taken against the flat</p>
+				  </div>
+
 				<div class="modal-body">
+
+					<table class="leaderboardTable col-12" id = "edit_rw_table">
+						<caption style="caption-side: top">This Raffle Period</caption>
+						<thead>
+							<th>Weight</th>
+							<th class='d-none'>Type</th>
+							<th>Last updated</th>
+							<th class='d-none'>id</th>
+							<th ></th>
+							<th></th>
+
+						</thead>
+						<tbody>
+							<tr>
+								<td>100</td>
+								<td class='d-none'>2</td>
+								<td>19-02-21</td>
+								<!-- hide: trash id -->
+								<td class='d-none'>1</td>
+								<td><button onclick="open_edit(this)"> Edit </button></td>
+								<td><button onclick="delete_row(this)"> Remove </button></td>
+							<!-- Use to access the id in the database -->
+							</tr>
+							<tr>	
+								<td>200</td>
+								<td class='d-none'>2</td>
+								<td>19-02-21</td>
+								<!-- hide: trash id -->
+								<td class='d-none'>2</td>
+								<td><button onclick="open_edit(this)"> Edit </button></td>
+								<td><button onclick="delete_row(this)"> Remove </button></td>
+							</tr>
+							<tr>
+								<td>300</td>
+								<td class='d-none'>2</td>
+								<td>19-02-21</td>
+								<!-- hide: trash id -->
+								<td class='d-none'>3</td>
+								<td><button onclick="open_edit(this)"> Edit </button></td>
+								<td><button onclick="delete_row(this)"> Remove </button></td>
+							</tr>
+						</tbody>
+					</table>
 					<!--database number -->
-					<label class="d-block">Measured <span id="rw_value_modal">15kg </span> </label>
-					<label>New measurement: </label>
-					<input type="number" id="input_edit_rw">
+					<!-- <label class="d-block">Measured <span id="rw_value_modal">15kg </span> </label> -->
+					<!-- <label>New measurement: </label>
+					<input type="number" id="input_edit_rw"> -->
 				</div>
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<!--update the new value into the database-->
-					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick= "replace($('#input_edit_rw').val(), $('#rw_value'))">Save changes</button>
+
 				</div>
 			</div>
 		</div>
