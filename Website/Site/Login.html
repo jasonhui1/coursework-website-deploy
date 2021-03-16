@@ -227,6 +227,11 @@
                
                 <div class="form-pop-up" id="cheat-det">
                     <div class="form-container">
+                        <div id="mdiv" onclick="closeComp()">
+                            <div class="mdiv">
+                                <div class="md"></div>
+                            </div>
+                        </div>
                         <h4>Show some love to your competitor</h4>
                         <div class="pop-up-body">
                         <p>
@@ -263,6 +268,10 @@
       
     function closeForm() {
         document.getElementById("myForm").style.display = "none";
+    }
+
+    function closeComp() {
+        document.getElementById("cheat-det").style.display = "none";
     }
     
     function registerCDPopUp(){
