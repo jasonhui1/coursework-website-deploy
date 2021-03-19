@@ -27,8 +27,8 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: { 
+    //only https work
     // secure: true 
-    maxAge: 20
   }
 }))
 
@@ -49,6 +49,9 @@ app.use('/static', express.static('Website'));
 //other files
 const user = require('./Server/User.js')
 const accom = require('./Server/Accommodation.js')
+//use as middleware before any data access needed in dashboard/ elsewhere
+const {auth_user} = require('./Server/User.js')
+
 
 //CHECK LOGIN
 app.post('/login_user', user.login_in_user, (request, response) => {

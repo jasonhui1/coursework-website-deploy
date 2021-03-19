@@ -3,7 +3,7 @@ const fs   = require('fs');
 const path = require("path");
 const express = require('express');
 const router = express.Router()
-const {auth_user} = require('./Server/User.js')
+const {auth_user_bool} = require('./Server/User.js')
 const session = require('express-session');
 require('dotenv').config();
 
@@ -35,7 +35,7 @@ router.get('/Site/:filepath', (request, response) => {
 	//   console.log(request.session)
 	  //Check if this user is logged in or not
 	  if(typeof request.session !== 'undefined' && typeof request.session.user !== 'undefined'){
-		let logged_in = auth_user(request.session.user.id, request.session.user.user_name)
+		let logged_in = auth_user_bool(request.session.user.id, request.session.user.user_name)
   
 		if(logged_in){
 		  response.sendFile(path.join(__dirname,'Website/Site/Main.html'));

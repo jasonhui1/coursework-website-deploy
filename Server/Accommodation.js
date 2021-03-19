@@ -38,7 +38,7 @@ async function get_accommodation_id_name_map(){
 
 async function get_accommodation_name(id){
 
-  let query = `SELECT name FROM accommodation WHERE id = ${id} LIMIT 1`;
+  let query = `SELECT name FROM accommodation WHERE id = ${mysql.escape(id)} LIMIT 1`;
   let result = await db.select_query(query)
 
   if(result.length == 0){
@@ -52,19 +52,16 @@ async function get_accommodation_name(id){
 
 async function get_accommodation_id(name){
 
-  console.log(name)
-  let query = `SELECT id FROM accommodation WHERE name = '${name}' LIMIT 1`;
+  let query = `SELECT id FROM accommodation WHERE name = ${mysql.escape(name)} LIMIT 1`;
   let result = await db.select_query(query)
 
   // initialise
   let accommodation_id = 0
 
   //accommdation name doesn't exist
-  //NEED TO DO: also check if email/ user_name existed already 
-
+  //NEED TO DO: also check if user_name existed already 
   if(result.length == 0){
-        //nned to add name to database
-      
+        //nned to add this accommodation name to database
       throw `Accommation name '${name}' not added into the database yet`
       return 'fail: Accommodation name not found'
 
@@ -103,7 +100,7 @@ async function query_sum_accom_trash(_round, array){
   //   round = find_last_round();
   // }
 
-  query = `SELECT trash_accommodation_id, trash_type_id, weight FROM trash WHERE trash_round = ${round}`
+  query = `SELECT trash_accommodation_id, trash_type_id, weight FROM trash WHERE trash_round = ${mysql.escape(round)}`
   let result = await db.select_query(query)
 
   if(result.length == 0){

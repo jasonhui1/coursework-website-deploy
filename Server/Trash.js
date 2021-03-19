@@ -19,46 +19,48 @@ router.use(session({
     saveUninitialized: true,
     cookie: { 
         // secure: true 
-        maxAge: 20
       }
 }))
 
+const {auth_user} = require('./User.js')
 
-async function get_trash_type_id (type){
 
-    let query = `SELECT id FROM trash_type WHERE type = ${mysql.escape(type)} LIMIT 1`
-    let result = await db.select_query(query)
+// async function get_trash_type_id (type){
+
+//     let query = `SELECT id FROM trash_type WHERE type = ${mysql.escape(type)} LIMIT 1`
+//     let result = await db.select_query(query)
     
-    if(result.length != 0){
-        let trash_type_id = result[0].id;
-        return trash_type_id;
-    } 
-}
+//     if(result.length != 0){
+//         let trash_type_id = result[0].id;
+//         return trash_type_id;
+//     } 
+// }
 
-async function get_trash_type_name(id){
+// async function get_trash_type_name(id){
 
-    let query = `SELECT type FROM trash_type WHERE id = ${mysql.escape(id)} LIMIT 1`
-    let result = await db.select_query(query)
+//     let query = `SELECT type FROM trash_type WHERE id = ${mysql.escape(id)} LIMIT 1`
+//     let result = await db.select_query(query)
 
-    if(result.length != 0){
-        let name = result[0].type;
-        return name;
+//     if(result.length != 0){
+//         let name = result[0].type;
+//         return name;
 
-        }
-}
+//         }
+// }
 
-router.post('/update_trash_entry', async (request, response) => {
+router.post('/update_trash_entry', auth_user, async (request, response) => {
     let id = request.body.id
     let weight = request.body.new_weight
-    let query = `UPDATE trash SET weight = ${weight} WHERE id = ${id}`
-    await db.update_query(query)
+    let query = `UPDATE trash SET weight = ? WHERE id = ?`
+    let inserts = [weight, id]
+    await db.update_query(mysql.format(query, inserts))
 
     response.json ({
         status : "success"
     })
 })
 
-router.post('/remove_trash_entry', async (request, response) => {
+router.post('/remove_trash_entry', auth_user, async (request, response) => {
     let id = request.body.id
     let query = `DELETE FROM trash WHERE id = ${mysql.escape(id)}`
     await db.delete_query(query)

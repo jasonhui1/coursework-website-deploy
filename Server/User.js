@@ -16,13 +16,33 @@ app.use(session({
     saveUninitialized: true,
     cookie: { 
       // secure: true 
-      maxAge: 20
     }
 }))
 
 app.use(express.json({ limit: '3mb' }));
 
-function auth_user(user_id, user_name){
+//middleware for auth user
+function auth_user(request, response, next){
+
+  if(request.session.user != undefined){
+
+    let user_id = request.session.user.id
+    let user_name = request.session.user.user_name
+
+    for (user of users){
+      if(user.id === user_id && user.user_name === user_name){
+        return next()
+      }
+    }
+
+    response.redirect('../Site/Login.html')
+  }
+
+  response.redirect('../Site/Login.html')
+}
+
+//function to check if user is logged in
+function auth_user_bool(user_id, user_name){
 
   if (typeof user_id !== 'undefined' && typeof user_name !== 'underfined'){
     for (user of users){
@@ -86,7 +106,7 @@ async function login_in_user(request, response, next){
   if(await bcrypt.compare(request.body.password, result[0].password)){
       console.log("RIGHT")
 
-      user = {"id": result[0].id, "user_name": result[0].user_name, "accommodation_id": result[0].user_accommodation_id, "sesson_id": request.sessionID};
+      user = {"id": result[0].id, "user_name": result[0].user_name, "accommodation_id": result[0].user_accommodation_id};
       users.push(user)
 
       request.session.user = user
@@ -128,6 +148,7 @@ module.exports = {
 
     users,
     auth_user,
+    auth_user_bool,
     register_user,
     login_in_user,
     logout_user

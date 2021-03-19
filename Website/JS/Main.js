@@ -103,6 +103,12 @@ async function get_leaderboard_data(time = 'current'){
     //Add the rows
     table.find("tbody").append(html);
 
+    if(time == 'current'){
+
+        $('#last_update_leaderboard').html(res.last_update)
+        $('#next_update_leaderboard').html(res.next_update)
+    }
+
 }
 
 async function get_my_accommodation_data(){

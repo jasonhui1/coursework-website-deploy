@@ -186,6 +186,34 @@ h2 {
 .navbar-right{
 	float: right;
 }
+.navbar-middle{
+	text-align: center;
+	margin-right: 7%;
+}
+.factButtonText{
+	font-size: 200%;
+}
+
+a.nav-link:link
+{
+   color: white;
+   text-decoration: none;
+}
+a.nav-link:visited
+{
+   color: white;
+   text-decoration: none;
+}
+a.nav-link:hover
+{
+   color: white;
+   text-decoration-line: underline;
+}
+a.nav-link:active
+{
+   color: white;
+   text-decoration: none;
+}
 
 .leaderboard {
 	background-color: var(--leaderboard-section-background);
@@ -254,7 +282,7 @@ h2 {
 }
 
 .top {
-	background: linear-gradient(to right, #18a964, #36efa5);
+	background-color: #18a964;
 	margin-bottom: 0px;
 	padding-left: 16px;
 	padding-right: 16px;
@@ -316,7 +344,7 @@ h2 {
 	position: absolute;
 	width: 110px;
 	height: 100%;
-	background: linear-gradient(to right, #18a964, #36efa5);
+	background-color:#18a964;
 	border-radius: 30px;
 	transition: .5s;
 }
@@ -350,7 +378,7 @@ h2 {
 	cursor: pointer;
 	display: block;
 	margin: auto;
-	background: linear-gradient(to right, #18a964, #36efa5);
+	background-color:#18a964;
 	color: #fff;
 	border: 0;
 	outline: none;
@@ -359,7 +387,7 @@ h2 {
 
 .submit-btn:hover,
 .submit-btn:focus {
-	background: linear-gradient(to right, #18a963c8, #36efa5db);
+	background-color:#2bba64db;
 	text-decoration: none;
 	cursor: pointer;
 }
@@ -500,8 +528,8 @@ h4 {
     align-items: center;
     position: absolute;
     top: 0;
-	width:800px;
-	height:800px;
+	width:100%;
+	height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
 }
 .gallery-item:hover .text-description{
@@ -515,8 +543,8 @@ h4 {
 }
 
 .gallery-image {
-	width:800px;
-	height:800px;
+	max-width: 100%;
+    height: auto;
     object-fit: cover;
 }
 
