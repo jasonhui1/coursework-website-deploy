@@ -92,7 +92,7 @@ async function get_leaderboard_data(time = 'current'){
         <td> ${ticket_award}</td>\
         <td> ${row.name}</td>\
         <td> ${(row.percentage*100).toFixed(2)}% </td>\
-        <td> ?? </td>\
+        <td> 0 </td>\
         </tr>`
 
         last_percentage = row.percentage
@@ -104,7 +104,6 @@ async function get_leaderboard_data(time = 'current'){
     table.find("tbody").append(html);
 
     if(time == 'current'){
-
         $('#last_update_leaderboard').html(res.last_update)
         $('#next_update_leaderboard').html(res.next_update)
     }
@@ -148,7 +147,7 @@ async function get_my_accommodation_data(){
         <td> ${ticket_award}</td>\
         <td> ${accom.name}</td>\
         <td> ${(accom.percentage*100).toFixed(2)}% </td>\
-        <td> ?? </td>\
+        <td> 0 </td>\
         </tr>`
 
         start_position += 1
@@ -168,8 +167,8 @@ function open_edit(ele){
     html += `<td class='d-none'>${weight_td.find('td:eq(1)').text()}</td>`
     html += `<td>${weight_td.find('td:eq(2)').text()}</td>`
     html += `<td class='d-none'>${weight_td.find('td:eq(3)').text()}</td>`
-    html += `<td><button onclick="save_edit(this)"> Save </button></td>`
-    html += `<td><button onclick="cancel_edit(this)"> Cancel </button></td>`
+    html += `<td><button id="pop-up-edit" onclick="save_edit(this)"> Save </button></td>`
+    html += `<td><button id="pop-up-delete" onclick="cancel_edit(this)"> Cancel </button></td>`
     html += "</tr>"
 
     weight_td.after(html)
@@ -221,8 +220,8 @@ async function get_trash_data(type){
         <td class = 'd-none'> ${type}</td>\
         <td> ${time}</td>\
         <td class = 'd-none'>${trash_id}</td>\
-        <td><button onclick="open_edit(this)"> Edit </button></td>
-        <td><button onclick="delete_row(this)"> Remove </button></td>
+        <td><button id="pop-up-edit" onclick="open_edit(this)"> Edit </button></td>
+        <td><button id="pop-up-delete" onclick="delete_row(this)"> Remove </button></td>
         </tr>`
     }
     //Delete existing rows

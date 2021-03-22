@@ -22,7 +22,7 @@ const {auth_user} = require('./User.js')
 //initialise
 let ranking_current = []
 let ranking_previous = []
-let last_update, next_update
+let last_update = next_update = ""
 
 //refresh leaderboard every 12 hours (req 5.3)
 const refresh_leaderboard_time = 12*3600*1000
@@ -33,16 +33,37 @@ async function start(){
     //map the accommodation id and name into an array
     await accom.initialise()
     ranking_current = accom.get_ranking_current();
+    get_last_next_update_time()
     ranking_previous = accom.get_ranking_previous();
+    
 }
 
 async function calculate_current_leaderboard(){
     //map the accommodation id and name into an array
     await accom.calculate_current_leaderboard();
-    date = new Date()
-    last_update = date.getFullYear() + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2) + ' ' + ('0' + date.getHours()).slice(-2) + ':' + '00:00';
-    next_update = date.getFullYear() + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2) + ' ' + ('0' + (date.getHours() + 12)).slice(-2) + ':' + '00:00';
+    get_last_next_update_time()
     ranking_current = accom.get_ranking_current();
+}
+
+function get_last_next_update_time(){
+    let date = new Date()
+    let am_pm_c = 'am'
+    let am_pm_p = 'pm'
+
+    if (date.getHours() >= 12){
+        am_pm_c = 'pm'
+        am_pm_p = 'am'
+
+    } else {
+        am_pm_c = 'am'
+        am_pm_p = 'pm'
+
+    }
+
+    last_update = date.getDate() + '/' + (date.getMonth()+1)  + ' ' + date.getHours() + am_pm_c;
+    next_update = date.getDate() + '/' + (date.getMonth()+1)  + ' ' + date.getHours() + am_pm_p;
+
+
 }
 
 //Send leaderboard data
