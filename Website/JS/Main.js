@@ -135,7 +135,17 @@ async function get_my_accommodation_data(){
     //have last position
     for (row of positions){
 
-        html += `<tr style= "background-color: white; color: #000;">\
+        console.log(row.position, res.position)
+        if(row.position == res.position){
+            html += `<tr style= "background-color: white; color: #000;">`
+
+
+        } else {
+            html += `<tr style= "background-color: orange; color: #000;">`
+ 
+        }
+
+        html += `
         <td> ${row.position}</td>\
         <td> ${row.ticket_award}</td>\
         <td> ${row.name}</td>\
@@ -234,7 +244,7 @@ async function save_edit(ele){
 
     if(weight == ''){
         alert('no weight entered')
-    }
+    } else {
 
     $.ajax({
         url: "/update_trash_entry",
@@ -249,6 +259,8 @@ async function save_edit(ele){
 
             }
         })
+
+    }
 
 }
 

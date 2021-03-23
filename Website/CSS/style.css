@@ -31,8 +31,29 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
+ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+  }
+
+  
+li a {
+	float: right;
+	display: block;
+	padding: 8px;
+	background-color: #57cd6cd6;
+	border-radius: 10px;
+}
+
+#bath-img{
+	position: absolute;
+}
+
 #log-out{
 	color: var(--header-text);
+	position: bottom;
+	float:right
 }
 
 h1  {
@@ -80,7 +101,7 @@ h2 {
 	margin: 30px;
 }
 
-#gw_button, #gw_add_button, #rw_add_button, #rw_button, #pop-up-delete, #pop-up-edit{
+#gw_button, #gw_add_button, #rw_add_button, #rw_button, #pop-up-delete, #pop-up-edit, #pop-up-close, #btn-save, #btn-cancel{
 	color:#147c4a;
 	background-color: #fff;
 	border-radius: 5px;
@@ -139,6 +160,7 @@ h2 {
 #right { 
 	overflow: auto;
 	min-height:170px;
+	padding:20px;
 }
 
 /*changing the float behaviour to be responsive when the screen width is decreased*/
@@ -188,17 +210,11 @@ h2 {
 	color: white;
 	overflow: hidden;
 }
-.navbar-left{
-	float: left;
+
+.info{
+	position:absolute;
 }
 
-.navbar-right{
-	float: right;
-}
-.navbar-middle{
-	text-align: center;
-	margin-right: 7%;
-}
 .factButtonText{
 	font-size: 200%;
 }

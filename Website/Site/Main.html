@@ -20,22 +20,16 @@
 <!--navigation bar-->
 <div class="section topnav">
 
-	<!-- left items of navigation bar -->
-	<div class="navbar-left">
-		<img src="../images/UoB_Logo.svg">
-	</div>
-
-	<div class="navbar-middle">
-		<a href="Facts.html" class="nav-link" id="Info page"><span class="factButtonText">Info page</span></a>
-	</div>
-
-	<!-- right items of navigation bar -->
-	<div class="navbar-right">
-		<a href="" id="log-out"><span><i class="fas fa-sign-out-alt" ></i>Log out</span></a>
-	</div>
+	<ul>
+		<li><a id="log-out" href='Login.html'><span><i class="fas fa-sign-out-alt" ></i>Log out</span></a></li>
+		<li><a class="nav-link" href='Facts.html'>Info Page</a></li>
+		<li id="bath-img "><img src="../images/UoB_Logo.svg"></li>
+	</ul>
 
 </div>
 
+
+<h2 class="text-center text-danger">  Congrat! You won the last raffle </h2>
 <body>
 	
 	<!-- Prize and description -->
@@ -48,12 +42,17 @@
 			<div id="right" class="prize prizeDescription">
 				
 				<p>
-					Pizza ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-					labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-					laboris nisi ut aliquip ex ea commodo consequat.
-					Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-					pariatur. Excepteur sint occaecat
-					cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					This weeks prize is coupons, supplied by but not limited to:
+				</p>
+					<ul>
+						<li>UberEats</li>
+						<li>Deliveroo</li>
+						<li>Just Eat</li>
+						<li>Lime Tree on campus</li>
+					</ul>
+				<p>		
+					Work hard and this win these vouchers for delicous food such as pizza
+					delivered straight to your door!!
 				</p>
 			</div>
 		</div>
@@ -96,7 +95,7 @@
 					<td>2100</td>
 				</tr>
 
-				<tr style= "background-color: white; color: #000;">
+				<tr style= "background-color: orange; color: #000;">
 					<td> before_you</td>
 					<td> ??</td>
 					<td> Accom name</td>
@@ -112,7 +111,7 @@
 					<td> ?? </td>
 				</tr>
 
-				<tr style= "background-color: white; color: #000;">
+				<tr style= "background-color: orange; color: #000;">
 					<td> after you</td>
 					<td> ??</td>
 					<td> Accom name</td>
@@ -158,7 +157,7 @@
 						<td>2100</td>
 					</tr>
 	
-					<tr style= "background-color: white; color: #000;">
+					<tr style= "background-color: orange; color: #000;">
 						<td> before_you</td>
 						<td> ??</td>
 						<td> Accom name</td>
@@ -166,14 +165,14 @@
 						<td> ?? </td>
 					</tr>
 					<tr style= "background-color: white; color: #000;">
-						<td> before_you</td>
+						<td> you</td>
 						<td> ??</td>
 						<td> Accom name</td>
 						<td> XX% </td>
 						<td> ?? </td>
 					</tr>
-					<tr style= "background-color: white; color: #000;">
-						<td> before_you</td>
+					<tr style= "background-color: orange; color: #000;">
+						<td> after_you</td>
 						<td> ??</td>
 						<td> Accom name</td>
 						<td> XX% </td>
@@ -231,7 +230,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">Add general waste measurement</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<button id="btn-close" type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
@@ -299,7 +298,8 @@
 				</div>
 
 				<div class=cheat-deterrent-body>
-					<p>IMPORTANT!<br><br>We value fair competition between all participants in the Baffle.Hence, we implore you to think of your competitors and yourself. You wouldn't want someone to cheat you of of your victory so don't do the same to sommeone else.<br>If comes to our attention that cheating has taken place appropiate measures will be taken against the flat</p>
+					<h4>DISCLAIMER!</h4>
+					<p>We value fair competition between all participants in the Baffle. Hence, we implore you to think of your competitors and yourself. You wouldn't want someone to cheat you of of your victory so don't do the same to sommeone else. If comes to our attention that cheating has taken place, appropriate measures will be taken against the culprit.</p>
 				  </div>
 
 				<div class="modal-body">
@@ -331,8 +331,8 @@
 									<td>19-02-21</td>
 									<!-- hide: trash id -->
 									<td class='d-none'>2</td>
-									<td><button onclick="open_edit(this)"> Edit </button></td>
-									<td><button onclick="delete_row(this)"> Remove </button></td>
+									<td><button id="pop-up-edit" onclick="open_edit(this)"> Edit </button></td>
+									<td><button id="pop-up-delete" onclick="delete_row(this)"> Remove </button></td>
 								</tr>
 								<tr>
 									<td>301</td>
@@ -340,8 +340,8 @@
 									<td>19-02-21</td>
 									<!-- hide: trash id -->
 									<td class='d-none'>3</td>
-									<td><button onclick="open_edit(this)"> Edit </button></td>
-									<td><button onclick="delete_row(this)"> Remove </button></td>
+									<td><button id="pop-up-edit" onclick="open_edit(this)"> Edit </button></td>
+									<td><button id="pop-up-delete" onclick="delete_row(this)"> Remove </button></td>
 								</tr>
 							</tbody>
 						</table>
@@ -369,7 +369,8 @@
 				</div>
 
 				<div class=cheat-deterrent-body>
-					<p>IMPORTANT!<br><br>We value fair competition between all participants in the Baffle.Hence, we implore you to think of your competitors and yourself. You wouldn't want someone to cheat you of of your victory so don't do the same to sommeone else.<br>If comes to our attention that cheating has taken place appropiate measures will be taken against the flat</p>
+					<h4>DISCLAIMER!</h4>
+					<p>We value fair competition between all participants in the Baffle. Hence, we implore you to think of your competitors and yourself. You wouldn't want someone to cheat you of of your victory so don't do the same to sommeone else. If comes to our attention that cheating has taken place, appropriate measures will be taken against the culprit.</p>
 				  </div>
 
 				<div class="modal-body">
@@ -392,8 +393,8 @@
 								<td>19-02-21</td>
 								<!-- hide: trash id -->
 								<td class='d-none'>1</td>
-								<td><button onclick="open_edit(this)"> Edit </button></td>
-								<td><button onclick="delete_row(this)"> Remove </button></td>
+								<td><button id="pop-up-edit" onclick="open_edit(this)"> Edit </button></td>
+								<td><button id="pop-up-delete" onclick="delete_row(this)"> Remove </button></td>
 							<!-- Use to access the id in the database -->
 							</tr>
 							<tr>	
@@ -402,8 +403,8 @@
 								<td>19-02-21</td>
 								<!-- hide: trash id -->
 								<td class='d-none'>2</td>
-								<td><button onclick="open_edit(this)"> Edit </button></td>
-								<td><button onclick="delete_row(this)"> Remove </button></td>
+								<td><button id="pop-up-edit" onclick="open_edit(this)"> Edit </button></td>
+								<td><button id="pop-up-delete" onclick="delete_row(this)"> Remove </button></td>
 							</tr>
 							<tr>
 								<td>300</td>
@@ -411,8 +412,8 @@
 								<td>19-02-21</td>
 								<!-- hide: trash id -->
 								<td class='d-none'>3</td>
-								<td><button onclick="open_edit(this)"> Edit </button></td>
-								<td><button onclick="delete_row(this)"> Remove </button></td>
+								<td><button id="pop-up-edit" onclick="open_edit(this)"> Edit </button></td>
+								<td><button id="pop-up-delete" onclick="delete_row(this)"> Remove </button></td>
 							</tr>
 						</tbody>
 					</table>

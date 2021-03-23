@@ -62,8 +62,8 @@ function get_last_next_update_time(){
 
     }
 
-    last_update = date.getHours() + am_pm_c;
-    next_update = date.getHours() + am_pm_p;
+    last_update = date.getHours()%12 + am_pm_c;
+    next_update = date.getHours()%12 + am_pm_p;
 
 }
 
