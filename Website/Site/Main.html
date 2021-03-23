@@ -62,14 +62,15 @@
 	</div>
 	
 
-	<div class="section leaderboard">Leaderboard
+	<div class="section leaderboard">
 		<table class="leaderboardTable" id = "current_leader_board">
-			<caption style="caption-side: top">Current Leaderboard (Last updated on: <span id='last_update_leaderboard'>18/3/2021 1pm</span>, Next update on: <span id='next_update_leaderboard'>19/3/2021 1am</span>)</caption>
+			<caption style="caption-side: top"><span class="ml-3"></span>Current Leaderboard (Last updated on: <span id='last_update_leaderboard'>1pm</span>, Next update on: <span id='next_update_leaderboard'>1am</span>)</caption>
+			
 			<thead>
 				<th>Position</th>
 				<th>Tickets awarded after this week</th>
 				<th>Accomodation name</th>
-				<th>Percentage Recycled in this period (%)</th>
+				<th>Percentage Recycled in this period</th>
 				<th>No. of Raffle Tickets</th>
 			</thead>
 			<tbody>
@@ -126,12 +127,12 @@
 
 		<table class="leaderboardTable">
 			<table class="leaderboardTable" id = "previous_leader_board">
-				<caption style="caption-side: top">Previous Raffle Period</caption>
+				<caption style="caption-side: top"><span class="ml-3"></span>Previous Raffle Period (Prize Winner: <span id='last_winner'>Eastwood 1</span>, Prize: <span id = 'last_prize'>Banana</span>)</caption>
 				<thead>
 					<th>Position</th>
 					<th>Tickets awarded after this week</th>
 					<th>Accomodation name</th>
-					<th>Percentage Recycled in this period (%)</th>
+					<th>Percentage Recycled in this period</th>
 					<th>No. of Raffle Tickets</th>
 				</thead>
 				<tbody>
@@ -188,9 +189,9 @@
 	<div class="section submission">
 		<!--Creating the submission table where users input weight-->
 		<table class="subTable">
-			<caption style="caption-side: top">Your current submission</caption>
+			<caption style="caption-side: top"><span class="ml-3"></span>Your current submission</caption>
 			<tr>
-				<td>Amount of general rubbish</td>
+				<td><span class="ml-2"></span>Amount of general rubbish</td>
 				<!--Need to make it so only when edit is pressed the content is editable, else cannot-->
 				<td contentEditable="false"><span id="gw_value">50</span><span id="gw_unit">kg</span></td>
 				<!--Button should allow amount to be edited/updated to the database -->
@@ -198,7 +199,7 @@
 				<td><button type="button" id="gw_add_button" data-toggle="modal" data-target="#add_gw_modal">ADD</button></td>
 			</tr>
 			<tr>
-				<td>Amount recycled this week</td>
+				<td><span class="ml-2"></span>Amount recycled this week</td>
 				<!--Need to make it so only when edit is pressed the content is editable, else cannot-->
 				<td contentEditable="false"><span id="rw_value">20</span><span  id="rw_unit">kg</span></td>
 				<!--Button should allow amount to be edited/updated to the database -->
@@ -209,14 +210,14 @@
 		</table>
 
 		<table class="subTable">
-			<caption style="caption-side: top">Raffle details</caption>
+			<caption style="caption-side: top"><span class="ml-3"></span>Raffle details</caption>
 			<tr>
-				<td>Your total recycling percentages</td>
+				<td><span class="ml-2"></span>Your total recycling percentages</td>
 				<!--Percentage from data -->
 				<td><span id="percentage">40%</span></td>
 			</tr>
 			<tr>
-				<td>Next rubbish collection date</td>
+				<td><span class="ml-2"></span>Next rubbish collection date</td>
 				<!--Random collection date???-->
 				<td>31/3/2021</td>
 			</tr>
@@ -433,6 +434,6 @@
 	
 <script src="../JS/Main.js"></script>
 
-<div class="section footer">Footer</div>
+<div class="section footer"> .</div>
 
 </html>

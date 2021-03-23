@@ -34,20 +34,12 @@ async function get_accommodation_id_name_map(){
         accom_id_name_map[(row.id - 1)/10] = row.name
     }
   }
+
 }
 
-async function get_accommodation_name(id){
+function get_accommodation_name(id){
 
-  let query = `SELECT name FROM accommodation WHERE id = ${mysql.escape(id)} LIMIT 1`;
-  let result = await db.select_query(query)
-
-  if(result.length == 0){
-      console.log("id: " + id)
-      return "None"
-
-  } else {
-    return result[0].name;
-  }
+    return accom_id_name_map[(id-1)/10]
 }
 
 async function get_accommodation_id(name){
@@ -78,6 +70,7 @@ class Accommodation_trash {
     this.general = general;
     this.recyclable = recyclable;
     this.percentage = 0
+    this.ticket_amount = 0;
   }
 }
 
@@ -88,19 +81,9 @@ let accommodation_trash_current = [];
 let accommodation_trash_previous = []
 
 
-async function query_sum_accom_trash(_round, array){
+async function query_sum_accom_trash(round, array){
 
-  let query = "";
-  let round = _round;
-
-  // if(_round != 'all'){
-  //   round = _round;
-
-  // } else {
-  //   round = find_last_round();
-  // }
-
-  query = `SELECT trash_accommodation_id, trash_type_id, weight FROM trash WHERE trash_round = ${mysql.escape(round)}`
+  let query = `SELECT trash_accommodation_id, trash_type_id, weight FROM trash WHERE trash_round = ${mysql.escape(round)}`
   let result = await db.select_query(query)
 
   if(result.length == 0){
@@ -118,10 +101,31 @@ async function query_sum_accom_trash(_round, array){
       } else{
         array[(accom_id - 1) / 10].recyclable += parseInt(row.weight)
       }
+
+      array[(accom_id - 1) / 10].ticket_amount = await get_ticket_amount(round, accom_id, array)
+
     }
 
   }
 }
+
+async function get_ticket_amount(round, accom_id, array){
+
+  let query = `SELECT amount FROM ticket WHERE ticket_round = ${mysql.escape(round)} AND ticket_accom_id = ${mysql.escape(accom_id)} `
+  let result = await db.select_query(query)
+
+  if(result.length == 0){
+    query = 'INSERT INTO ticket (ticket_round, ticket_accom_id, amount) VALUES (?,?,?)';
+    let inserts = [round, accom_id, 0];
+    db.insert_query(query, inserts) 
+    return 0
+
+  } else {
+    return result[0].amount
+  }
+}
+
+
 
 //sum the amount of trash of all accommodations, stored in the accommodation_trash_current array
 async function sum_trash(time){
@@ -147,9 +151,9 @@ function rank_accommodation(array, save_array){
 
     if((curr_accom.recyclable + curr_accom.general) != 0){
 
-      save_array.push({"id": accom_id, "name": accom_name, "percentage": curr_accom.recyclable / (curr_accom.recyclable + curr_accom.general)})
+      save_array.push({"id": accom_id, "name": accom_name, "percentage": curr_accom.recyclable / (curr_accom.recyclable + curr_accom.general), 'has_ticket': curr_accom.ticket_amount})
     } else {
-      save_array.push({"id": accom_id, "name": accom_name, "percentage": 0})
+      save_array.push({"id": accom_id, "name": accom_name, "percentage": 0, 'has_ticket': curr_accom.ticket_amount})
     }
 
   }

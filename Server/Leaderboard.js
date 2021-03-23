@@ -1,7 +1,10 @@
 const accom = require('./Accommodation.js')
+const past_winners = require('./Past_Winner.js')
 const express = require('express');
 const router = express.Router()
 const mysql = require('mysql2');
+
+
 
 const session = require('express-session');
 
@@ -35,7 +38,6 @@ async function start(){
     ranking_current = accom.get_ranking_current();
     get_last_next_update_time()
     ranking_previous = accom.get_ranking_previous();
-    
 }
 
 async function calculate_current_leaderboard(){
@@ -77,9 +79,20 @@ router.get('/Main/get_leaderboard_data_current', auth_user, (request, response) 
 })
   
 router.get('/Main/get_leaderboard_data_previous', auth_user, (request, response) => {
-  
+
     response.json({
         "ranking": ranking_previous.slice(0,3),
+    })
+
+})
+
+router.get('/Main/get_last_winner', auth_user, async (request, response) => {
+
+    let winner = await past_winners.get_last_winner()
+  
+    response.json({
+        "accom_id": winner[0],
+        "reward" : winner[1]
     })
 
 })

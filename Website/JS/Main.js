@@ -2,6 +2,7 @@ $(document).ready(async function () {
     //Leaderboard
     await get_leaderboard_data(time = 'current');
     await get_leaderboard_data(time = 'previous');
+    await get_last_winner() 
     await get_my_accommodation_data(time = 'current');
     await get_my_accommodation_data(time = 'previous');
 
@@ -12,6 +13,8 @@ $(document).ready(async function () {
     //Get data for edit table
     await get_trash_data(1);
     await get_trash_data(2);
+
+
 });
 
 //display general waste
@@ -81,7 +84,7 @@ async function get_leaderboard_data(time = 'current'){
         <td> ${row.ticket_award}</td>\
         <td> ${row.name}</td>\
         <td> ${(row.percentage*100).toFixed(2)}% </td>\
-        <td> 0 </td>\
+        <td> ${row.has_ticket} </td>\
         </tr>`
         last_percentage = row.percentage
 
@@ -97,6 +100,17 @@ async function get_leaderboard_data(time = 'current'){
     }
 
 }
+
+async function get_last_winner(){
+
+    let response = await fetch('/Main/get_last_winner')
+    let res = await response.json()
+    $('#last_winner').html(res.accom_id)
+    $('#last_prize').html(res.reward)
+
+}
+
+
 
 async function get_my_accommodation_data(){
 
@@ -126,7 +140,7 @@ async function get_my_accommodation_data(){
         <td> ${row.ticket_award}</td>\
         <td> ${row.name}</td>\
         <td> ${(row.percentage*100).toFixed(2)}% </td>\
-        <td> 0 </td>\
+        <td> ${row.has_ticket} </td>\
         </tr>`
     }
 
