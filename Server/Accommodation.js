@@ -155,6 +155,34 @@ function rank_accommodation(array, save_array){
   }
   //sort by percentage, descending order
   save_array.sort((a,b) => b.percentage - a.percentage)
+  caluclate_position_ticket_award(save_array)
+}
+
+function caluclate_position_ticket_award(array){
+
+  let position = 1
+  let last_percentage = array[0].percentage
+  let base_ta = (1/(Math.pow(2, 1.3)) * 100 + 1/(Math.pow(2,0.5)) * 100)
+  let ticket_award = base_ta
+
+  for (accom of array){
+
+    if (accom.percentage < last_percentage){
+      position += 1
+      last_percentage = accom.percentage
+
+    }
+    if (accom.percentage != 0){
+      ticket_award = Math.round((1/(Math.pow(position + 1, 1.3)) * 100 + 1/(Math.pow(position + 1,0.5)) * 100) / base_ta * 100)
+
+    } else {
+      ticket_award = 0
+    }
+
+    accom.position = position
+    accom.ticket_award = ticket_award
+
+  }
 }
 
 //get ranking of the current user
@@ -168,55 +196,17 @@ function get_my_accommodation_ranking(id, time = 'current'){
     array = ranking_previous
   }
 
-  let position = 0
-  // let last_percentage = 10000
-
   for (i = 0; i < array.length; i++){
     row = array[i]
 
-    //if equal (comment for now)
-    // if(row.percentage < last_percentage){
-    //   position += 1
-    // } 
-    position += 1
-
     if(row.id == id){
-
-      last_pos_exist = true
-      next_pos_exist = true
-
-      if (0 > i-1){
-        last_pos_exist = false
-      }
-
-      if( i + 2 > array.length){
-        next_pos_exist = false
-      }
-
-      return [array.slice(Math.max(0,i-1), Math.min(i+2, array.length)),position, [last_pos_exist, next_pos_exist]];
+      //Show before and after your accommodation
+      return [array.slice(Math.max(0,i-1), Math.min(i+2, array.length)),row.position];
     }
-
-    // last_percentage = row.percentage
-  }
-
-  for (row of array){
-
-    if(row.percentage < last_percentage){
-      position += 1
-    } 
-
-    if(row.id == id){
-
-      row.position = position
-      return row;
-    }
-
-    last_percentage = row.percentage
   }
 }
 
 //run these functions when the server starts
-
 async function initialise(){
     await get_accommodation_id_name_map()
     await calculate_current_leaderboard()
@@ -225,7 +215,6 @@ async function initialise(){
 }
 
 async function calculate_current_leaderboard(){
-
   ranking_current = []
   accommodation_trash_current = Array(accom_id_name_map.length).fill().map(x => new Accommodation_trash(0,0))
   await sum_trash('current')

@@ -60,9 +60,8 @@ function get_last_next_update_time(){
 
     }
 
-    last_update = date.getDate() + '/' + (date.getMonth()+1)  + ' ' + date.getHours() + am_pm_c;
-    next_update = date.getDate() + '/' + (date.getMonth()+1)  + ' ' + date.getHours() + am_pm_p;
-
+    last_update = date.getHours() + am_pm_c;
+    next_update = date.getHours() + am_pm_p;
 
 }
 
@@ -72,7 +71,6 @@ router.get('/Main/get_leaderboard_data_current', auth_user, (request, response) 
     response.json({
         "ranking": ranking_current.slice(0,3),
         "last_update": last_update,
-        "next_update": next_update
     })
 
 })
@@ -93,7 +91,6 @@ router.get('/Main/get_my_accommodation_ranking_current', auth_user, (request, re
     response.json({
         "ranking": data[0],
         "position": data[1],
-        'last_next': data[2],
     })
 })
 

@@ -73,28 +73,16 @@ async function get_leaderboard_data(time = 'current'){
 
     let res = await response.json()
     let html = ""
-    let position = 0
-    let last_percentage = 10000
-    let ticket_award = 110
-
 
     for (row of res.ranking){
 
-        if(row.percentage < last_percentage){
-            if(ticket_award >= 0){
-                ticket_award -= 10
-            }
-            position += 1
-        }
-
         html += `<tr>\
-        <td> ${position}</td>\
-        <td> ${ticket_award}</td>\
+        <td> ${row.position}</td>\
+        <td> ${row.ticket_award}</td>\
         <td> ${row.name}</td>\
         <td> ${(row.percentage*100).toFixed(2)}% </td>\
         <td> 0 </td>\
         </tr>`
-
         last_percentage = row.percentage
 
     }
@@ -128,29 +116,18 @@ async function get_my_accommodation_data(){
     let res = await response.json()
 
     let html = ""
-    let rank = res.ranking
-    let position = res.position
-    let last_next = res.last_next
-
-    let start_position = position
+    let positions = res.ranking
 
     //have last position
-    if (last_next[0]){
-        start_position -= 1
-    }
-
-    for (accom of rank){
-        ticket_award = 100 - Math.min(100, (start_position - 1) *10)
+    for (row of positions){
 
         html += `<tr style= "background-color: white; color: #000;">\
-        <td> ${start_position}</td>\
-        <td> ${ticket_award}</td>\
-        <td> ${accom.name}</td>\
-        <td> ${(accom.percentage*100).toFixed(2)}% </td>\
+        <td> ${row.position}</td>\
+        <td> ${row.ticket_award}</td>\
+        <td> ${row.name}</td>\
+        <td> ${(row.percentage*100).toFixed(2)}% </td>\
         <td> 0 </td>\
         </tr>`
-
-        start_position += 1
     }
 
     //add after the last row

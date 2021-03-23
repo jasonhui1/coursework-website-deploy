@@ -554,16 +554,14 @@ h4 {
 .gallery-item:hover .text-description{
 	font-size: 25px;
 	color: #fff;
-	position:absolute;
-	visibility: visible;
 }
-.text-description{
-	visibility: hidden;
+.item-description {
+    display: none;
 }
 
 .gallery-image {
-	max-width: 100%;
-    height: auto;
+	width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
