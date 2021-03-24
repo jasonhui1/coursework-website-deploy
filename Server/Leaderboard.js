@@ -28,7 +28,7 @@ let ranking_previous = []
 let last_update = next_update = ""
 
 //refresh leaderboard every 12 hours (req 5.3)
-const refresh_leaderboard_time = 300000
+const refresh_leaderboard_time = 12*3600*1000
 setInterval(calculate_current_leaderboard, refresh_leaderboard_time)
 
 start()
