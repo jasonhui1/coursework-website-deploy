@@ -49,21 +49,25 @@ async function calculate_current_leaderboard(){
 
 function get_last_next_update_time(){
     let date = new Date()
-    let am_pm_c = 'am'
-    let am_pm_p = 'pm'
+    // let am_pm_c = 'am'
+    // let am_pm_p = 'pm'
 
-    if (date.getHours() >= 12){
-        am_pm_c = 'pm'
-        am_pm_p = 'am'
+    // if (date.getHours() >= 12){
+    //     am_pm_c = 'pm'
+    //     am_pm_p = 'am'
 
-    } else {
-        am_pm_c = 'am'
-        am_pm_p = 'pm'
+    // } else {
+    //     am_pm_c = 'am'
+    //     am_pm_p = 'pm'
 
-    }
+    // }
 
-    last_update = date.getHours()%12 + am_pm_c;
-    next_update = date.getHours()%12 + am_pm_p;
+    // last_update = date.getHours()%12 + am_pm_c;
+    // next_update = date.getHours()%12 + am_pm_p;
+
+    
+    last_update = date.getHours() + ':' + date.getMinutes();
+    next_update = ((date.getHours() + (refresh_leaderboard_time/1000/3600))%24) + ':' + ((date.getMinutes() + (refresh_leaderboard_time/24/3600))%60);
 
 }
 
