@@ -8,7 +8,7 @@ async function query_current_raffle(){
     //format the date yyyy-mm-dd
     let formatDate = date.getFullYear() + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
 
-    let query = `SELECT round FROM raffle WHERE (start_date < ${mysql.escape(formatDate)} AND end_date > ${mysql.escape(formatDate)})`
+    let query = `SELECT round FROM raffle WHERE (start_date < ${mysql.escape(formatDate)} AND end_date >= ${mysql.escape(formatDate)})`
     let result = await db.select_query(query)
 
     if(result.length != 0){

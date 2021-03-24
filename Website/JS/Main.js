@@ -129,7 +129,6 @@ async function get_my_accommodation_data(){
 
     let res = await response.json()
 
-    console.log(res)
     let html = ""
     let positions = res.ranking
 
@@ -243,7 +242,7 @@ async function save_edit(ele){
     let trash_id = parseInt(weight_td.find('td:eq(3)').text())
 
     if(weight == ''){
-        alert('no weight entered')
+        // alert('no weight entered')
     } else {
 
     $.ajax({
