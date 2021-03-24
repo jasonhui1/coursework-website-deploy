@@ -129,13 +129,13 @@ async function get_my_accommodation_data(){
 
     let res = await response.json()
 
+    console.log(res)
     let html = ""
     let positions = res.ranking
 
     //have last position
     for (row of positions){
 
-        console.log(row.position, res.position)
         if(row.position == res.position){
             html += `<tr style= "background-color: white; color: #000;">`
 

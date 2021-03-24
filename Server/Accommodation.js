@@ -154,6 +154,7 @@ function rank_accommodation(array, save_array){
       save_array.push({"id": accom_id, "name": accom_name, "percentage": curr_accom.recyclable / (curr_accom.recyclable + curr_accom.general), 'has_ticket': curr_accom.ticket_amount})
     } else {
       save_array.push({"id": accom_id, "name": accom_name, "percentage": 0, 'has_ticket': curr_accom.ticket_amount})
+      // console.log(save_array)
     }
 
   }
