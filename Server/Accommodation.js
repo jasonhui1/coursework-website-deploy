@@ -211,6 +211,7 @@ function get_my_accommodation_ranking(id, time = 'current'){
   }
 }
 
+
 //run these functions when the server starts
 async function initialise(){
     await get_accommodation_id_name_map()
